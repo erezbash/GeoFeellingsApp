@@ -10,7 +10,8 @@
     "react": "16.0.0",
     "react-native": "0.51.0",
     "react-native-notification": "^2.0.0",
-    "react-native-notifications": "^1.1.17"
+    "react-native-notifications": "^1.1.17",
+    "react-navigation": "^1.0.0-beta.22"
   },
   "devDependencies": {
     "babel-jest": "22.0.4",
