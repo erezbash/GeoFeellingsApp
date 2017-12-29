@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, View, Text, Alert} from 'react-native';
+import {Button, View, Text, Alert, FlatList} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import {NotificationsAndroid} from 'react-native-notifications';
 import RadioButtonGroup from './RadioButtonGroup'
@@ -86,7 +86,16 @@ class HomeScreen extends React.Component {
                 <Text style={{fontSize: 33}}>Home Screen</Text>
                 <Text>Latitude: {this.state.latitude}</Text>
                 <Text>Longitude: {this.state.longitude}</Text>
+                <Button
+                    onPress={() => {
+                        const {navigate} = this.props.navigation;
+                        navigate('Details');
+                    }}
+                    title="Submit"
+                />
             </View>
+
+
         );
     }
 }
@@ -95,13 +104,30 @@ class HomeScreen extends React.Component {
 class DetailsScreen extends React.Component {
     render() {
         return (
-            <View style={{flex: 3, alignItems: 'flex-end', padding: 20}}>
-                <RadioButtonGroup name={"Happiness"}/>
-                <RadioButtonGroup name={"Sadness"}/>
-                <RadioButtonGroup name={"Surprise"}/>
-                <RadioButtonGroup name={"Fear"}/>
-                <RadioButtonGroup name={"Disgust"}/>
-                <RadioButtonGroup name={"Anger"}/>
+            <View style={{flex: 1}}>
+                <FlatList
+                    keyExtractor={(item, index) => index}
+                    data={[
+                        {numberOfRadios: 5, name:"Happiness"},
+                        {numberOfRadios: 5, name:"Sadness"},
+                        {numberOfRadios: 5, name:"Sadness"},
+                        {numberOfRadios: 5, name:"Surprise"},
+                        {numberOfRadios: 5, name:"Surprise"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 5, name:"Disgust"},
+                        {numberOfRadios: 5, name:"Anger"},
+                    ]}
+                    renderItem={({item}) =>
+                        <RadioButtonGroup
+                            name={item.name}
+                            numberOfRadios={item.numberOfRadios}/>}
+                />
                 <Button
                     onPress={() => Alert.alert(
                         'Thanks!',
