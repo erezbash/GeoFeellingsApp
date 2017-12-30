@@ -1,5 +1,6 @@
 import {Navigation} from 'react-native-navigation';
-import {DetailsScreen, HomeScreen} from "../../MainScreen";
+import DetailsScreen from "./types/DetailsScreen";
+import HomeScreen from "./types/HomeScreen";
 
 export function registerScreens() {
     Navigation.registerComponent('example.Home', () => HomeScreen);
