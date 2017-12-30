@@ -1,4 +1,4 @@
-package com.test2;
+package com.geofeellingsapp;
 
 import com.reactnativenavigation.controllers.SplashActivity;
 
@@ -9,6 +9,6 @@ public class MainActivity extends SplashActivity {
      * This is used to schedule rendering of the component.
      */
     protected String getMainComponentName() {
-        return "Test2";
+        return "GeoFeellingsApp";
     }
 }

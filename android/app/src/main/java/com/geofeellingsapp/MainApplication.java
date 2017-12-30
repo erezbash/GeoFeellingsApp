@@ -1,4 +1,4 @@
-package com.test2;
+package com.geofeellingsapp;
 
 import android.app.Application;
 
