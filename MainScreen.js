@@ -109,18 +109,18 @@ class DetailsScreen extends React.Component {
                     keyExtractor={(item, index) => index}
                     data={[
                         {numberOfRadios: 5, name:"Happiness"},
-                        {numberOfRadios: 5, name:"Sadness"},
-                        {numberOfRadios: 5, name:"Sadness"},
-                        {numberOfRadios: 5, name:"Surprise"},
-                        {numberOfRadios: 5, name:"Surprise"},
+                        {numberOfRadios: 2, name:"Sadness"},
+                        {numberOfRadios: 4, name:"Sadness"},
+                        {numberOfRadios: 6, name:"Surprise"},
+                        {numberOfRadios: 2, name:"Surprise"},
+                        {numberOfRadios: 3, name:"Fear"},
                         {numberOfRadios: 5, name:"Fear"},
                         {numberOfRadios: 5, name:"Fear"},
                         {numberOfRadios: 5, name:"Fear"},
                         {numberOfRadios: 5, name:"Fear"},
+                        {numberOfRadios: 1, name:"Fear"},
                         {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 5, name:"Disgust"},
+                        {numberOfRadios: 3, name:"Disgust"},
                         {numberOfRadios: 5, name:"Anger"},
                     ]}
                     renderItem={({item}) =>

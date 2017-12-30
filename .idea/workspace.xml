@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0454cc01-a88e-491f-8d54-d6f22ca8b778" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MainScreen.js" afterPath="$PROJECT_DIR$/MainScreen.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RadioButtonGroup.js" afterPath="$PROJECT_DIR$/RadioButtonGroup.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,8 +44,8 @@
       <file leaf-file-name="MainScreen.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MainScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="121" column="42" lean-forward="false" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+            <state relative-caret-position="511">
+              <caret line="122" column="42" lean-forward="false" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -128,6 +124,7 @@
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/RadioButtonGroup.js" />
         <option value="$PROJECT_DIR$/MainScreen.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -341,12 +338,12 @@
       <option name="presentableId" value="Default" />
       <updated>1514504983060</updated>
       <workItem from="1514504984363" duration="7067000" />
-      <workItem from="1514586812886" duration="3995000" />
+      <workItem from="1514586812886" duration="4340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11062000" />
+    <option name="totallyTimeSpent" value="11407000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -496,10 +493,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="125" column="17" lean-forward="false" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MainScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="121" column="42" lean-forward="false" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+        <state relative-caret-position="511">
+          <caret line="122" column="42" lean-forward="false" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
