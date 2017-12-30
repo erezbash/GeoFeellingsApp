@@ -19,7 +19,7 @@ function handleRegistrationToken(deviceToken) {
     });
 }
 
-class HomeScreen extends React.Component {
+export class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
 
@@ -101,7 +101,7 @@ class HomeScreen extends React.Component {
 }
 
 
-class DetailsScreen extends React.Component {
+export class DetailsScreen extends React.Component {
     render() {
         return (
             <View style={{flex: 1}}>

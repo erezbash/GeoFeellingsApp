@@ -1,4 +1,23 @@
-import { AppRegistry } from 'react-native';
-import RootNavigator from './MainScreen';
+import {registerScreens} from './src/screens'
+import { Navigation } from 'react-native-navigation';
 
-AppRegistry.registerComponent('Test2', () => RootNavigator);
+registerScreens();
+
+Navigation.startTabBasedApp({
+    tabs: [
+        {
+            label: 'One',
+            icon: require('./img/one.png'),
+            screen: 'example.Home', // this is a registered name for a screen
+            title: 'Screen One'
+        },
+        {
+            label: 'Two',
+            icon: require('./img/one.png'),
+            screen: 'example.Details',
+            title: 'Screen Two'
+        }
+    ]
+});
+
+// AppRegistry.registerComponent('Test2', () => RootNavigator);
