@@ -1,54 +1,37 @@
 import React from "react";
-import {StyleSheet, Button, KeyboardAvoidingView, Text, View, Image, ScrollView, TextInput} from "react-native";
+import {View, TextInput, Text, Button} from 'react-native-ui-lib';
 import {startApp} from "../../app";
-import UserInput from "../../components/UserInput";
 
 export default class LoginScreen extends React.Component {
 
     render() {
         return (
-            <ScrollView style={{paddingTop: 20}}>
-                <UserInput source={require("../../../img/username.png")}
-                           autoCapitalize={'sentences'}
-                           placeholder='Username'/>
-                <View style={{margin: 7}}/>
-                <UserInput source={require("../../../img/username.png")}
-                           autoCapitalize={'none'}
-                           placeholder='Password'/>
-                <View style={{padding: 20}}>
-                <Button
-                    onPress={() => startApp('after-login')}
-                    title="Submit"
-                />
+            <View flex paddingH-25 paddingT-120>
+                <Text blue50 text20>Welcome</Text>
+                <TextInput text50 placeholder="username" dark10/>
+                <TextInput text50 placeholder="password" secureTextEntry dark10/>
+                <View marginT-100 center>
+                    <Button
+                        onPress={() => startApp('after-login')}
+                        text70
+                        white
+                        background-orange30
+                        label="Login"/>
+                    <Button
+                        onPress={() =>
+                            this.props.navigator.push({
+                                screen: 'example.RegisterScreen'
+                            })
+                        }
+                        link
+                        text70
+                        orange30
+                        label="Sign Up"
+                        marginT-20
+                    />
                 </View>
-            </ScrollView>
+            </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    btnEye: {
-        position: 'absolute',
-        top: 55,
-        right: 28,
-    },
-    iconEye: {
-        width: 25,
-        height: 25,
-        tintColor: 'rgba(255,255,0,0.2)',
-    },
-    image: {
-        width: 80,
-        height: 80,
-    },
-    text: {
-        color: 'black',
-        fontWeight: 'bold',
-        backgroundColor: 'transparent',
-        marginTop: 20,
-    }
-});
