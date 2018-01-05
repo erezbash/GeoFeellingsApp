@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Alert, Button} from 'react-native';
+import {View, TextInput, Text, Button} from 'react-native-ui-lib';
+import {startApp} from "../../app";
 
 
 export default class HomeScreen extends React.Component  {
@@ -13,35 +14,35 @@ export default class HomeScreen extends React.Component  {
         };
     }
 
-    // componentDidMount() {
-    //     navigator.geolocation.getCurrentPosition(
-    //         (position) => {
-    //             this.setState({
-    //                 latitude: position.coords.latitude,
-    //                 longitude: position.coords.longitude,
-    //                 error: "",
-    //             });
-    //         },
-    //         () => {},
-    //         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    //     );
-    // }
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: "",
+                });
+            },
+            () => {},
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        );
+    }
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={{fontSize: 33}}>Home Screen</Text>
+            <View flex paddingH-25 paddingT-120>
+                <Text blue50 text20>Home Screen</Text>
                 <Text>Latitude: {this.state.latitude}</Text>
                 <Text>Longitude: {this.state.longitude}</Text>
                 <Button
                     onPress={() => {
                         const to = 'hidden';
-                        this.props.navigator.toggleTabs({
-                            to,
-                            animated: true,
-                        });
+                        startApp('login')
                     }}
-                    title="Submit"
+                    text70
+                    white
+                    background-orange30
+                    label="Logout"
                 />
             </View>
 
