@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import {Alert, AsyncStorage, Platform} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {NotificationsAndroid} from "react-native-notifications/index.android";
 import NotificationsIOS from "react-native-notifications/index.ios";
@@ -17,6 +17,12 @@ if (Platform.OS === 'android') {
 if (Platform.OS === 'ios') {
     NotificationsIOS.addEventListener('remoteNotificationsRegistered', handleRegistrationToken);
     NotificationsIOS.requestPermissions();
+}
+
+export var token;
+
+export function setToken(_token) {
+    token = _token;
 }
 
 export function startApp(root) {
@@ -51,4 +57,24 @@ export function startApp(root) {
 
 }
 
-startApp('login');
+async function check_token(){
+    try {
+        token = await AsyncStorage.getItem('userID');
+        if (token !== null) {
+            if (typeof token === 'string') {
+                startApp('after-login');
+            }
+            else{
+                startApp('login');
+            }
+        }
+        else{
+            startApp('login');
+        }
+    } catch (error) {
+        // Error retrieving data
+    }
+
+}
+
+check_token();
