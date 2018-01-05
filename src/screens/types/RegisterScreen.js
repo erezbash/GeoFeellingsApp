@@ -11,8 +11,9 @@ export default class RegisterScreen extends React.Component {
 
     render() {
         return (
-            <View flex paddingH-25 paddingT-120>
+            <View flex paddingH-25 paddingT-20>
                 <Text blue50 text20>Register</Text>
+                <View marginT-30 />
                 <TextInput
                     text50 dark10
                     placeholder="username"
@@ -27,6 +28,16 @@ export default class RegisterScreen extends React.Component {
                     text50 dark10 secureTextEntry
                     placeholder="passwordAgain"
                     onChangeText={(text) => this.setState({passwordAgain: text})}
+                />
+                <TextInput
+                    text50 dark10 secureTextEntry
+                    placeholder="sex"
+                    onChangeText={(text) => this.setState({sex: text})}
+                />
+                <TextInput
+                    text50 dark10 secureTextEntry
+                    placeholder="age"
+                    onChangeText={(text) => this.setState({age: text})}
                 />
                 <View marginT-100 center>
                     <Button
