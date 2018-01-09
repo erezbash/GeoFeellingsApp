@@ -8,9 +8,9 @@ import {registerScreens} from "./screens";
 registerScreens();
 
 if (Platform.OS === 'android') {
-    NotificationsAndroid.setRegistrationTokenUpdateListener(handleRegistrationToken);
-    NotificationsAndroid.setNotificationReceivedListener(handleNotificationOpenApp);
-    NotificationsAndroid.setNotificationOpenedListener(handleNotificationOpenApp);
+    // NotificationsAndroid.setRegistrationTokenUpdateListener(handleRegistrationToken);
+    // NotificationsAndroid.setNotificationReceivedListener(handleNotificationOpenApp);
+    // NotificationsAndroid.setNotificationOpenedListener(handleNotificationOpenApp);
 
 }
 
@@ -21,8 +21,13 @@ if (Platform.OS === 'ios') {
 
 export var token;
 
-export function setToken(_token) {
+export async function setToken(_token) {
     token = _token;
+    await AsyncStorage.setItem('userID', token);
+}
+
+export async function clearToken() {
+    await AsyncStorage.removeItem('userID');
 }
 
 export function startApp(root) {
