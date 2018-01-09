@@ -56,9 +56,9 @@ export default class RegisterScreen extends React.Component {
             }
         });
         return (
-            <View flex paddingH-25 paddingT-20>
+            <View flex paddingH-15>
                 <Text blue50 text20>Register</Text>
-                <View marginT-30 />
+                <View marginT-15 />
                 <TextInput
                     text50 dark10
                     placeholder="username"
@@ -75,17 +75,21 @@ export default class RegisterScreen extends React.Component {
                     onChangeText={(text) => this.setState({passwordAgain: text})}
                 />
                 <Picker
+                    style={{height: 120}} itemStyle={{height: 120}}
                     selectedValue={this.state.gender}
                     onValueChange={(itemValue, itemIndex) => this.setState({gender: itemValue})}>
                     <Picker.Item label="select gender" value="gender" />
                     <Picker.Item label="male" value="MALE" />
                     <Picker.Item label="female" value="FEMALE" />
                 </Picker>
+                <View marginT-5 />
                 <Picker
+                    style={{height: 120}} itemStyle={{height: 120}}
                     selectedValue={this.state.age}
                     onValueChange={(itemValue, itemIndex) => this.setState({age: itemValue})}>
                     {serviceItems}
                 </Picker>
+                <View marginT-15 />
                 <View center>
                     <Button
                         onPress={() => {
