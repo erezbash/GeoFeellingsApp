@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, Text, Button} from 'react-native-ui-lib';
-import {startApp} from "../../app";
+import {startApp, clearToken} from "../../app";
 
 
 export default class HomeScreen extends React.Component  {
@@ -37,6 +37,7 @@ export default class HomeScreen extends React.Component  {
                 <Button
                     onPress={() => {
                         const to = 'hidden';
+                        clearToken()
                         startApp('login')
                     }}
                     text70
