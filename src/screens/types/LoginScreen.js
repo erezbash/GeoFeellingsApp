@@ -2,7 +2,7 @@ import React from "react";
 import {Alert, AsyncStorage} from 'react-native';
 import {View, TextInput, Text, Button} from 'react-native-ui-lib';
 import {startApp, setToken} from "../../app";
-
+import {handleLogin} from "../../notifcations/androidHandler";
 export default class LoginScreen extends React.Component {
 
     constructor(props) {
@@ -27,13 +27,9 @@ export default class LoginScreen extends React.Component {
                 />
                 <View marginT-100 center>
                     <Button
-                        onPress={async () => {
+                        onPress={() => {
                             try {
-                                //token = GET request login(this.username, this.password)
-                                var _token = 'adasd-123213dad-adasd3213-adad';
-                                setToken(_token)
-                                //await AsyncStorage.setItem('userID', 'erezbash');
-                                await AsyncStorage.setItem('userID', _token);
+                                handleLogin(this.state.username, this.state.password)
                                 startApp('after-login');
                             } catch (error) {
                                 // Error saving data
