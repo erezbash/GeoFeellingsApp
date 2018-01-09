@@ -34,6 +34,21 @@ export function handleLogin(username, password) {
     });
 }
 
+export function handleRegister(userDetails, regCallback){
+    fetch('http:/132.72.23.65:8080/api/user/register', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: userDetails,
+    }).then((response) => response.json())
+        .then((responseJson) => regCallback(responseJson))
+        .catch((error) => {
+        Alert.alert("Error", error);
+    });
+}
+
 export function handleNotificationOpenApp(notification) {
     Alert.alert(
         'New Message',
