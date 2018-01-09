@@ -1,7 +1,7 @@
 import {Alert} from "react-native";
-
+import {setToken} from "../app"
 export function handleRegistrationToken(deviceToken) {
-    fetch('http:/192.168.1.145:8080/registerToken', {
+    fetch('http:/132.72.23.65:8080/registerToken', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -11,6 +11,25 @@ export function handleRegistrationToken(deviceToken) {
             token: deviceToken,
         }),
     }).catch((error) => {
+        Alert.alert("Error", error);
+    });
+}
+
+export function handleLogin(username, password) {
+    fetch('http:/132.72.23.65:8080/api/user/login', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userName: username,
+            password: password
+        }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+            setToken(responseJson.id);
+        }).catch((error) => {
         Alert.alert("Error", error);
     });
 }
