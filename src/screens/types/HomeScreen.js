@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, Text, Button} from 'react-native-ui-lib';
-import {startApp, clearToken} from "../../app";
+import {startApp, clearToken, token} from "../../app";
 
 
 export default class HomeScreen extends React.Component  {
@@ -32,6 +32,7 @@ export default class HomeScreen extends React.Component  {
         return (
             <View flex paddingH-25 paddingT-120>
                 <Text blue50 text20>Home Screen</Text>
+                <Text>id: {token}</Text>
                 <Text>Latitude: {this.state.latitude}</Text>
                 <Text>Longitude: {this.state.longitude}</Text>
                 <Button
