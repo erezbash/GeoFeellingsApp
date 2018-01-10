@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
-import {NotificationsAndroid} from 'react-native-notifications';
 import RadioButton from 'react-native-radio-button';
 import PropTypes from 'prop-types';
+import {Text, View} from "react-native-ui-lib";
+import {FlatList} from "react-native";
 
 class RadioButtonGroup extends React.Component {
 
@@ -28,18 +28,20 @@ class RadioButtonGroup extends React.Component {
     render() {
         const {name} = this.props;
         return (
-            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={{fontSize: 20, padding: 20}}>{name}</Text>
-                <View style={{flexDirection: 'row'}}>
+            <View flex paddingT-15>
+                <Text text40 center>{name}</Text>
+                <View padding-20 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View left><Text text75>Not at all</Text></View>
+                    <View right><Text text75 right>Extremely</Text></View>
+                </View>
+                <View center paddingB-5>
                     <FlatList
                         keyExtractor={(item, index) => index}
-                        style={{padding: 10}}
-                        ItemSeparatorComponent={() => <View style={{width: 10}}/> }
+                        ItemSeparatorComponent={() => <View padding-10/>}
                         horizontal={true}
                         data={this.state.currentSelected.map((b, i) => {
                             return {key: i, isNeedToShow: b}
                         })}
-
                         renderItem={({item}) =>
                             <RadioButton
                                 animation={'bounceIn'}

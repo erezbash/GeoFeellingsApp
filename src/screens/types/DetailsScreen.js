@@ -1,33 +1,35 @@
 import React from 'react';
-import {Button, View, Alert, FlatList} from 'react-native';
-import RadioButtonGroup from "../../components/RadioButtonGroup";
+import {Alert, FlatList} from 'react-native';
+import {Button, Colors, Text, TextArea, TextInput, View} from "react-native-ui-lib";
+import Question from "../../components/Question";
 
 export default class DetailsScreen extends React.Component {
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View flex padding-5>
                 <FlatList
                     keyExtractor={(item, index) => index}
+                    ItemSeparatorComponent={() => <View padding-10/>}
                     data={[
-                        {numberOfRadios: 5, name:"Happiness"},
-                        {numberOfRadios: 2, name:"Sadness"},
-                        {numberOfRadios: 4, name:"Sadness"},
-                        {numberOfRadios: 6, name:"Surprise"},
-                        {numberOfRadios: 2, name:"Surprise"},
-                        {numberOfRadios: 3, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 1, name:"Fear"},
-                        {numberOfRadios: 5, name:"Fear"},
-                        {numberOfRadios: 3, name:"Disgust"},
-                        {numberOfRadios: 5, name:"Anger"},
+                        {questionType: "OPEN", data: {numOfOptions: 7, questionString: "What do you think about Dor? sdf sjdhfsdkjfh sdjfh dsj"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Happiness"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Sadness"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Sadness"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Surprise"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Surprise"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Fear"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Disgust"}},
+                        {questionType: "RADIO", data: {numOfOptions: 7, questionString: "Anger"}},
                     ]}
-                       renderItem={({item}) =>
-                        <RadioButtonGroup
-                            name={item.name}
-                            numberOfRadios={item.numberOfRadios}/>}
+                    renderItem={({item}) =>
+                        <Question question={item}/>
+                    }
                 />
                 <Button
                     onPress={() => Alert.alert(
@@ -36,13 +38,17 @@ export default class DetailsScreen extends React.Component {
                         [
                             {
                                 text: 'Back Home', onPress: () => {
-                                const {navigate} = this.props.navigation;
-                                navigate('Home');}
+                                    const {navigate} = this.props.navigation;
+                                    navigate('Home');
+                                }
                             }
                         ],
                         {cancelable: false}
                     )}
-                    title="Submit"
+                    text70
+                    white
+                    background-orange30
+                    label="Submit"
                 />
             </View>
         );

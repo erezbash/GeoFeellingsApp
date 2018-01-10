@@ -1,5 +1,7 @@
 import {Alert} from "react-native";
 import {setToken} from "../app"
+import {awaitFetch} from "../javascript/htmlFetch";
+
 export function handleRegistrationToken(deviceToken) {
     fetch('http:/132.72.23.65:8080/registerToken', {
         method: 'POST',
@@ -16,37 +18,18 @@ export function handleRegistrationToken(deviceToken) {
 }
 
 export function handleLogin(username, password) {
-    fetch('http:/132.72.23.65:8080/api/user/login', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            userName: username,
-            password: password
-        }),
-    }).then((response) => response.json())
-        .then((responseJson) => {
-            setToken(responseJson.id);
-        }).catch((error) => {
-        Alert.alert("Error", error);
-    });
+    awaitFetch('POST', 'user/login', JSON.stringify({
+        userName: username,
+        password: password
+    }))
+        .then(userId => setToken(userId.id))
+        .catch(e => console.log(e));
 }
 
-export function handleRegister(userDetails, regCallback){
-    fetch('http:/132.72.23.65:8080/api/user/register', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: userDetails,
-    }).then((response) => response.json())
-        .then((responseJson) => regCallback(responseJson))
-        .catch((error) => {
-        Alert.alert("Error", error);
-    });
+export function handleRegister(userDetails, regCallback) {
+    awaitFetch('POST', 'user/register', userDetails)
+        .then(response => regCallback(response))
+        .catch(e => console.log(e));
 }
 
 export function handleNotificationOpenApp(notification) {
