@@ -21,7 +21,7 @@ class RadioButtonGroup extends React.Component {
 
     static propTypes = {
         name: PropTypes.string.isRequired,
-        numberOfRadios: PropTypes.number.isRequired
+        numberOfRadios: PropTypes.string.isRequired
     };
 
 
