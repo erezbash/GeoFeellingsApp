@@ -1,6 +1,6 @@
 import {Alert} from "react-native";
 import {setToken} from "../app"
-import {awaitFetch} from "../javascript/htmlFetch";
+import {awaitFetchPost} from "../javascript/htmlFetch";
 
 export function handleRegistrationToken(deviceToken) {
     fetch('http:/132.72.23.65:8080/registerToken', {
@@ -18,7 +18,7 @@ export function handleRegistrationToken(deviceToken) {
 }
 
 export function handleLogin(username, password) {
-    awaitFetch('POST', 'user/login', JSON.stringify({
+    awaitFetchPost('user/login', JSON.stringify({
         userName: username,
         password: password
     }))
@@ -27,7 +27,7 @@ export function handleLogin(username, password) {
 }
 
 export function handleRegister(userDetails, regCallback) {
-    awaitFetch('POST', 'user/register', userDetails)
+    awaitFetchPost('user/register', userDetails)
         .then(response => regCallback(response))
         .catch(e => console.log(e));
 }
