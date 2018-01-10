@@ -19,7 +19,10 @@ export default class Questionnaire extends React.Component {
 
     componentWillMount() {
         let fetch = awaitFetchGet(this.props.pathToFetch);
-        fetch.then(json => this.setState({data: json.questions}))
+        fetch
+            .then(json => this.setState({data: json.questions}))
+            .catch(e => console.log(e))
+
     }
 
     render() {
@@ -34,7 +37,9 @@ export default class Questionnaire extends React.Component {
                     }
                 />
                 <Button
-                    onPress={() => this.props.onSubmit("myMessage")}
+                    onPress={() => this.props.onSubmit([
+                        {id: "D34B2220-76AC-32BC-5454-6FD51DEC7588", answer: 'dslfdl jdlkfj dslkf'},
+                        {id: "C56A4180-65AA-42EC-A945-5FD21DEC0538", answer: 'dslfdl jdlkfj dslkf'}])}
                     text70
                     white
                     background-orange30

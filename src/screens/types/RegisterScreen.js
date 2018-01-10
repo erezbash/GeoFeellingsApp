@@ -1,13 +1,7 @@
 import React from "react";
 import {View, TextInput, Text, Button} from 'react-native-ui-lib';
 import {Alert, Picker, ScrollView} from "react-native";
-import {handleRegister} from "../../notifcations/androidHandler";
 
-
-var radio_props = [
-    {label: 'male', value: 0},
-    {label: 'female', value: 1}
-];
 
 function validator(state) {
     let valid = true;
@@ -32,20 +26,29 @@ function validator(state) {
 
 export default class RegisterScreen extends React.Component {
 
+    handleSubmit() {
+        let valid = validator(this.state);
+        if (valid === true) {
+            this.props.navigator.push({
+                screen: 'example.RegisterQuestionnaire',
+                passProps: {loginState: this.state}
+            });
+        }
+        else {
+            Alert.alert('Register failed!', 'please correct your details',);
+        }
+    }
+
     constructor(props) {
         super(props);
-        this.state = {};
-        //this.state.gender = "gender";
-        //this.state.age = "0"
-        this.state.gender = "MALE";
-        this.state.age = "25"
+        this.state = {gender: "MALE", age: "25"};
     }
 
 
     render() {
         let temp = [];
         temp.push("0");
-        for (i = 18; i < 120; i++) {
+        for (let i = 18; i < 120; i++) {
             temp.push(i.toString());
         }
         let serviceItems = temp.map((s, i) => {
@@ -95,46 +98,16 @@ export default class RegisterScreen extends React.Component {
                     <View center>
                         <Button
                             onPress={() => {
-                                let valid = validator(this.state)
-                                if (valid === true) {
-                                    let tempState = JSON.parse(JSON.stringify(this.state));
-                                    delete tempState.passwordAgain;
-                                    handleRegister(JSON.stringify(tempState), (responseJson) => {
-                                        if (responseJson.status === 'CREATED') {
-                                            Alert.alert(
-                                                'Thanks!',
-                                                'Register successfully',
-                                                [{
-                                                    text: 'OK', onPress: () => {
-                                                        this.props.navigator.pop({
-                                                            animated: true,
-                                                            animationType: 'fade'
-                                                        })
-                                                    }
-                                                }],
-                                                {cancelable: false}
-                                            );
-                                        }
-                                        else if (responseJson.status === 'CONFLICT') {
-                                            Alert.alert('CONFLICT!', 'Register fail',);
-                                        }
-
-                                    });
-                                }
-                                else {
-                                    Alert.alert('Unvalid!', 'please correct your details',);
-                                }
+                                this.handleSubmit();
                             }}
                             text70
                             white
                             background-orange30
-                            label="Register"/>
+                            label="Next"/>
                     </View>
                 </View>
             </ScrollView>
         );
     }
-
-
 }
 
