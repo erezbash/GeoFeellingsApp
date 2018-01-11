@@ -14,7 +14,7 @@ export default class RegisterQuestionnaire extends React.Component {
         return (
             <Questionnaire
                 pathToFetch='admin/question'
-                onSubmit={(msg) => {
+                onSubmit={msg => {
                     const loginState = {
                         questionnaireAnswer: msg,
                         userName: this.props.loginState.userName,
@@ -23,27 +23,41 @@ export default class RegisterQuestionnaire extends React.Component {
                         age: this.props.loginState.age
                     };
                     handleRegister(JSON.stringify(loginState), (responseJson) => {
-                        if (responseJson.status === 'CREATED') {
-                            Alert.alert(
-                                'Thanks!',
-                                'Register successfully',
-                                [{
-                                    text: 'OK', onPress: () => {
-                                        this.props.navigator.popToRoot({
-                                            animated: true,
-                                            animationType: 'fade',
-                                        });
-                                    }
-                                }],
-                                {cancelable: false}
-                            );
+                        switch (responseJson.status) {
+                            case 'CREATED' :
+                                this.handleCreated();
+                                break;
+                            case 'CONFLICT' :
+                                RegisterQuestionnaire.handleConflict();
+                                break;
+                            default :
+                                RegisterQuestionnaire.handleError();
                         }
-                        else if (responseJson.status === 'CONFLICT') {
-                            Alert.alert('Register failed', 'User name taken',);
-                        }
+                    });
+                }}/>)
+    }
 
+    static handleError() {
+        Alert.alert('Register failed', 'Something went wrong');
+    }
+
+    static handleConflict() {
+        Alert.alert('Register failed', 'User name taken');
+    }
+
+    handleCreated() {
+        Alert.alert(
+            'Thanks!',
+            'Register successfully',
+            [{
+                text: 'OK', onPress: () => {
+                    this.props.navigator.popToRoot({
+                        animated: true,
+                        animationType: 'fade',
                     });
                 }
-                }/>)
+            }],
+            {cancelable: false}
+        );
     }
 }
