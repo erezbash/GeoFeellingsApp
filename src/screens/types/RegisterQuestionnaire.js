@@ -22,7 +22,7 @@ export default class RegisterQuestionnaire extends React.Component {
                         gender: this.props.loginState.gender,
                         age: this.props.loginState.age
                     };
-                    handleRegister(JSON.stringify(loginState), (responseJson) => {
+                    handleRegister(loginState, (responseJson) => {
                         switch (responseJson.status) {
                             case 'CREATED' :
                                 this.handleCreated();

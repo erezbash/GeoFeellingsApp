@@ -1,9 +1,9 @@
-import {Alert, AsyncStorage, Platform} from 'react-native';
+import {AsyncStorage, Platform} from 'react-native';
 import {Navigation} from 'react-native-navigation';
-import {NotificationsAndroid} from "react-native-notifications/index.android";
 import NotificationsIOS from "react-native-notifications/index.ios";
-import {handleNotificationOpenApp, handleRegistrationToken} from "./notifcations/androidHandler";
+import {handleRegistrationToken} from "./notifcations/androidHandler";
 import {registerScreens} from "./screens";
+import Questionnaire from "./components/Questionnaire";
 
 registerScreens();
 
@@ -44,16 +44,17 @@ export function startApp(root) {
             Navigation.startTabBasedApp({
                 tabs: [
                     {
-                        label: 'One',
-                        icon: require('../img/one.png'),
-                        screen: 'example.Home', // this is a registered name for a screen
-                        title: 'Screen One'
+                        label: 'Profile',
+                        icon: require('../img/tabs/profile.png'),
+                        selectedIcon: require('../img/tabs/profileSelected.png'),
+                        screen: 'example.Home',
+                        title: 'Profile View'
                     },
                     {
-                        label: 'Two',
-                        icon: require('../img/one.png'),
+                        label: 'Questionnaire',
+                        icon: require('../img/done.png'),
                         screen: 'example.Details',
-                        title: 'Screen Two'
+                        title: 'Questionnaire'
                     }
                 ]
             });

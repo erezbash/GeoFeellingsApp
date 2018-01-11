@@ -18,10 +18,10 @@ export function handleRegistrationToken(deviceToken) {
 }
 
 export function handleLogin(username, password) {
-    awaitFetchPost('user/login', JSON.stringify({
+    awaitFetchPost('user/login', {
         userName: username,
         password: password
-    }))
+    })
         .then(userId => setToken(userId.id))
         .catch(e => console.log(e));
 }
