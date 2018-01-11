@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, TextInput, Text, Button} from 'react-native-ui-lib';
 import {startApp, clearToken, token} from "../../app";
+import twitter, {auth} from 'react-native-twitter';
+import {Alert, Linking} from "react-native";
 
 
 export default class HomeScreen extends React.Component  {
@@ -38,13 +40,23 @@ export default class HomeScreen extends React.Component  {
                 <Button
                     onPress={() => {
                         const to = 'hidden';
-                        clearToken()
+                        clearToken();
                         startApp('login')
                     }}
                     text70
                     white
                     background-orange30
                     label="Logout"
+                />
+
+                <Button
+                    onPress={() =>
+                        auth({consumerKey: "yRm6u04SFsTgYxDMyqHSrTvWc", consumerSecret: "pU1LYQ3o6kfyuDyOlexvckDmjr5EF6q7YE5teLRidsqA43Bkb3"}, "geofellingsapp://home/1")
+                            .then((accessToken, accessTokenSecret, id, name) => this.setState({accessToken:accessToken,accessTokenSecret: accessTokenSecret,id: id,name: name}))}
+                    text70
+                    white
+                    background-orange30
+                    label="Connect Twitter"
                 />
             </View>
 

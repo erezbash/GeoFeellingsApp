@@ -3,6 +3,7 @@ package com.geofeellingsapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import ga.piroro.rnt.RNTPackage;
 import com.wix.reactnativenotifications.RNNotificationsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+            new RNTPackage(),
                 new RNNotificationsPackage(MainApplication.this));
     }
 
