@@ -12,6 +12,7 @@ class RadioButtonGroup extends React.Component {
     }
 
     select = function (i) {
+        this.props.onUpdate({id : this.props.id, answer : i})
         this.setState(() => {
             let selected = Array.apply(false, {length: this.props.numberOfRadios});
             selected[i] = true;
