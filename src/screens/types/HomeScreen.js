@@ -34,7 +34,7 @@ export default class HomeScreen extends React.Component {
     render() {
         return (
             <ScrollView>
-            <View flex paddingT-25 top>
+            <View flex paddingT-5 top>
                 <View center>
                     <Text blue50 text20>Profile</Text>
                     <Text text30>James Bond</Text>

@@ -1,30 +1,30 @@
 import React from "react";
 import {View, TextInput, Text, Button} from 'react-native-ui-lib';
-import {startApp} from "../../app";
 import {handleLogin} from "../../notifcations/androidHandler";
-import {Alert} from "react-native";
 
-function validator(state){
-    let valid = true;
-    if(state.username === undefined){
-        valid = false
-    }
-    else if(state.username === ""){
-        valid = false
-    }
-    if(state.password === undefined){
-        valid = false
-    }
-    else if(state.password === ""){
-        valid = false
-    }
-    return valid;
-}
 export default class LoginScreen extends React.Component {
+
+    isValidLogin(){
+        let valid = true;
+        if(this.state.username === undefined || this.state.username === ""){
+            this.setState({usernameError: 'This field is required'});
+            valid = false
+        }
+        if(this.state.password === undefined || this.state.password === ""){
+            this.setState({passwordError: 'This field is required'});
+            valid = false
+        }
+        return valid;
+    }
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            password: undefined,
+            passwordError: '',
+            username: undefined,
+            usernameError: ''
+        }
     }
 
     render() {
@@ -35,22 +35,20 @@ export default class LoginScreen extends React.Component {
                 <TextInput
                     text50 dark10
                     placeholder="username"
-                    onChangeText={(text) => this.setState({username: text})}
+                    error={this.state.usernameError}
+                    onChangeText={(text) => this.setState({username: text, usernameError:''})}
                 />
                 <TextInput
                     text50 dark10 secureTextEntry
                     placeholder="password"
-                    onChangeText={(text) => this.setState({password: text})}
+                    error={this.state.passwordError}
+                    onChangeText={(text) => this.setState({password: text, passwordError:''})}
                 />
                 <View marginT-50 center>
                     <Button
                         onPress={() => {
-                            if(validator(this.state) === true){
+                            if(this.isValidLogin())
                                 handleLogin(this.state.username, this.state.password);
-                            }
-                            else{
-                                Alert.alert('Unvalid!', 'empty cells');
-                            }
                         }}
                         text70
                         white
