@@ -20,19 +20,13 @@ export default class Questionnaire extends React.Component {
     onAnswer =(ans) =>{
         this.state.answers[ans.id] = ans.answer;
         Alert.alert(JSON.stringify(this.state.answers, null, 4));
-    }
+    };
 
     componentWillMount() {
-        this.state.data.push({questionType : "RADIO",id:"1", numOfOptions: "5", questionString:"Happiness"});
-        this.state.data.push({questionType : "RADIO",id:"2", numOfOptions: "6", questionString:"Sadness"});
-        this.state.data.push({questionType : "OPEN",id:"4", questionString: "what is your name?"});
-        this.state.data.push({questionType : "OPEN",id:"5", questionString: "where are you now?"});
-        Alert.alert(JSON.stringify(this.state.data, null, 4));
-
-        /*let fetch = awaitFetchGet(this.props.pathToFetch);
+        let fetch = awaitFetchGet(this.props.pathToFetch);
         fetch
             .then(json => this.setState({data: json.questions}))
-            .catch(e => console.log(e))*/
+            .catch(e => console.log(e))
     }
 
     render() {

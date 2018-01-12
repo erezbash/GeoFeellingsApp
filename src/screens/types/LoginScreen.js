@@ -46,7 +46,7 @@ export default class LoginScreen extends React.Component {
                     <Button
                         onPress={() => {
                             if(validator(this.state) === true){
-                                handleLogin(this.state.username, this.state.password)
+                                handleLogin(this.state.username, this.state.password);
                                 startApp('after-login');
                             }
                             else{
