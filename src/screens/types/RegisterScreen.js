@@ -1,14 +1,19 @@
 import React from "react";
-import {View, TextInput, Text, Button} from 'react-native-ui-lib';
-import {Alert, Picker, ScrollView} from "react-native";
+import {View, Text, Button, TextInput, Colors, Picker} from 'react-native-ui-lib';
+import {Alert, ScrollView} from "react-native";
+import _ from 'lodash';
 
+const options = [
+    {label: 'Male', value: 'MALE'},
+    {label: 'Female', value: 'FEMALE'}
+];
 
 function validator(state) {
     let valid = true;
-    if (parseInt(state.age) < 1) {
+    if (state.age === undefined) {
         valid = false
     }
-    if (state.gender === "gender") {
+    if (state.gender === undefined) {
         valid = false
     }
     if ((state.password !== state.passwordAgain) ||
@@ -29,9 +34,15 @@ export default class RegisterScreen extends React.Component {
     handleSubmit() {
         let valid = validator(this.state);
         if (valid === true) {
+            let res = {
+                gender: this.state.gender.value,
+                age: this.state.age.value,
+                userName: this.state.userName,
+                password: this.state.password
+            };
             this.props.navigator.push({
                 screen: 'example.RegisterQuestionnaire',
-                passProps: {loginState: this.state}
+                passProps: {loginState: res}
             });
         }
         else {
@@ -41,60 +52,71 @@ export default class RegisterScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {gender: "MALE", age: "25"};
+        this.state = {gender: undefined, age: undefined, userName: undefined, password: undefined, passwordAgain:undefined};
     }
 
 
     render() {
-        let temp = [];
-        temp.push("0");
-        for (let i = 18; i < 120; i++) {
-            temp.push(i.toString());
-        }
-        let serviceItems = temp.map((s, i) => {
-            if (i === 0) {
-                return <Picker.Item key={i} value={s} label={"select age"}/>
-            }
-            else {
-                return <Picker.Item key={i} value={s} label={s}/>
-            }
-        });
         return (
             <ScrollView>
                 <View flex paddingH-15>
                     <Text blue50 text20>Register</Text>
-                    <View marginT-15/>
+                    <View marginT-5/>
                     <TextInput
-                        text50 dark10
+                        containerStyle={{marginBottom: 10}}
+                        floatingPlaceholder
+                        text50
+                        underlineColor={{focus: Colors.orange60, error: Colors.purple50}}
                         placeholder="username"
                         onChangeText={(text) => this.setState({userName: text})}
                     />
                     <TextInput
+                        containerStyle={{marginBottom: 10}}
                         text50 dark10 secureTextEntry
                         placeholder="password"
+                        underlineColor={{focus: Colors.orange60, error: Colors.purple50}}
                         onChangeText={(text) => this.setState({password: text})}
                     />
                     <TextInput
-                        text50 dark10 secureTextEntry
+                        containerStyle={{marginBottom: 10}}
+                        text50
+                        dark10
+                        secureTextEntry
                         placeholder="passwordAgain"
+                        underlineColor={{focus: Colors.orange60, error: Colors.purple50}}
                         onChangeText={(text) => this.setState({passwordAgain: text})}
                     />
+
                     <Picker
-                        style={{height: 120}} itemStyle={{height: 120}}
-                        selectedValue={this.state.gender}
-                        onValueChange={(itemValue, itemIndex) => this.setState({gender: itemValue})}>
-                        <Picker.Item label="select gender" value="gender"/>
-                        <Picker.Item label="male" value="MALE"/>
-                        <Picker.Item label="female" value="FEMALE"/>
+                        placeholder="Select Gender"
+                        value={this.state.gender}
+                        enableModalBlur={false}
+                        onChange={item => this.setState({gender: item})}
+                        topBarProps={{title: 'Select Your Gender'}}
+                    >
+                        {_.map(options, option =>
+                            <Picker.Item
+                                key={option.value}
+                                value={option}
+                            />,
+                        )}
+                    </Picker>
+
+                    <Picker
+                        placeholder="Select Age"
+                        value={this.state.age}
+                        enableModalBlur={false}
+                        onChange={item => this.setState({age: item})}
+                        topBarProps={{title: 'Select Your Age'}}
+                    >
+                        {_.range(18, 121).map(option =>
+                            <Picker.Item
+                                key={option}
+                                value={{label: option, value:option}}
+                            />,
+                        )}
                     </Picker>
                     <View marginT-5/>
-                    <Picker
-                        style={{height: 120}} itemStyle={{height: 120}}
-                        selectedValue={this.state.age}
-                        onValueChange={(itemValue, itemIndex) => this.setState({age: itemValue})}>
-                        {serviceItems}
-                    </Picker>
-                    <View marginT-15/>
                     <View center>
                         <Button
                             onPress={() => {

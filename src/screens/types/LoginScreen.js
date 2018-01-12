@@ -47,10 +47,9 @@ export default class LoginScreen extends React.Component {
                         onPress={() => {
                             if(validator(this.state) === true){
                                 handleLogin(this.state.username, this.state.password);
-                                startApp('after-login');
                             }
                             else{
-                                Alert.alert('Unvalid!', 'empty cells',);
+                                Alert.alert('Unvalid!', 'empty cells');
                             }
                         }}
                         text70

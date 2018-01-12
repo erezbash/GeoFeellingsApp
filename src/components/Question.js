@@ -28,10 +28,10 @@ export default class Question extends React.Component {
                             <Text text40>{this.props.question.data.questionString}</Text>
                             <TextArea
                                 placeholder="write something.."
-                                onEndEditing={(event) => {
+                                onChangeText={(text) => {
                                     this.props.onUpdate({
                                         id : this.props.question.id,
-                                        answer : event.nativeEvent.text
+                                        answer : text
                                     });
                                 }
                                 }

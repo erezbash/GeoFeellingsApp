@@ -13,8 +13,9 @@ export default class RegisterQuestionnaire extends React.Component {
     render() {
         return (
             <Questionnaire
-                pathToFetch='admin/question'
+                pathToFetch='user/registerQuestionnaire'
                 onSubmit={msg => {
+                    Alert.alert(JSON.stringify(msg));
                     const loginState = {
                         questionnaireAnswer: msg,
                         userName: this.props.loginState.userName,

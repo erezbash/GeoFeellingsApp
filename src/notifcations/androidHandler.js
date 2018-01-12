@@ -1,5 +1,5 @@
 import {Alert} from "react-native";
-import {setToken} from "../app"
+import {setToken, startApp} from "../app"
 import {awaitFetchPost} from "../javascript/htmlFetch";
 
 export function handleRegistrationToken(deviceToken) {
@@ -22,8 +22,17 @@ export function handleLogin(username, password) {
         userName: username,
         password: password
     })
-        .then(userId => setToken(userId.id))
-        .catch(e => console.log(e));
+        .then(userId => {
+            if (userId !== null) {
+                setToken(userId).then(() => startApp('after-login'));
+            } else {
+                Alert.alert('Login Failed!', 'Wrong username or password');
+            }
+        })
+        .catch(e => {
+            Alert.alert('Login Failed!', 'Something went wrong');
+            console.log(e)
+        });
 }
 
 export function handleRegister(userDetails, regCallback) {

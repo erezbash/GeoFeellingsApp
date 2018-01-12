@@ -1,4 +1,5 @@
 import {AsyncStorage} from "react-native";
+import {token} from "../app";
 
 const BaseUrl = 'http:/132.72.23.65:8080/api/';
 
@@ -26,8 +27,6 @@ export async function awaitFetchGet(suffix) {
 }
 
 export async function awaitFetchPostWithToken(suffix, body, sendBodyBack) {
-    let token = await AsyncStorage.getItem('userID');
-
     let response = await fetch(BaseUrl + suffix, {
         method: "POST",
         headers: {
@@ -40,7 +39,6 @@ export async function awaitFetchPostWithToken(suffix, body, sendBodyBack) {
 }
 
 export async function awaitFetchGetWithToken(suffix) {
-    let token = await AsyncStorage.getItem('userID');
     let response = await fetch(BaseUrl + suffix, {
         method: "GET",
         headers: {
@@ -53,7 +51,6 @@ export async function awaitFetchGetWithToken(suffix) {
 }
 
 export async function awaitFetchDeleteWithToken(suffix) {
-    let token = await AsyncStorage.getItem('userID');
     return await fetch(BaseUrl + suffix, {
         method: "DELETE",
         headers: {

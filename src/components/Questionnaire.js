@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {awaitFetchGet} from "../javascript/htmlFetch";
 import {FlatList, Alert} from "react-native";
-import {Button, View} from "react-native-ui-lib";
+import {Button, Text, View} from "react-native-ui-lib";
 import Question from "./Question";
+
 
 export default class Questionnaire extends React.Component {
 
@@ -14,24 +15,41 @@ export default class Questionnaire extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {data: [],answers: {}}
+        this.state = {data: [], answers: {}, name: "", id: "", location: null}
     }
 
-    onAnswer =(ans) =>{
+    onAnswer = (ans) => {
         this.state.answers[ans.id] = ans.answer;
-        Alert.alert(JSON.stringify(this.state.answers, null, 4));
     };
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({location: {latitude: position.coords.latitude, longitude: position.coords.longitude}})
+            },
+            () => console.log("failed get location"),
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        )
+    }
 
     componentWillMount() {
         let fetch = awaitFetchGet(this.props.pathToFetch);
         fetch
-            .then(json => this.setState({data: json.questions}))
+            .then(json => {
+                this.setState({data: json.questions, id: json.id, name: json.name})
+            })
             .catch(e => console.log(e))
+    }
+
+    sendWithLocation(msg) {
+        msg['location'] = this.state.location;
+        this.props.onSubmit(msg);
     }
 
     render() {
         return (
             <View flex padding-5>
+                <Text text40>{this.state.name}</Text>
                 <FlatList
                     keyExtractor={(item, index) => index}
                     ItemSeparatorComponent={() => <View padding-10/>}
@@ -40,11 +58,14 @@ export default class Questionnaire extends React.Component {
                         <Question question={item} onUpdate={this.onAnswer}/>
                     }
                 />
+
                 <Button
-                    onPress={() => this.props.onSubmit(this.state.answers)}
-                    /*onPress={() => this.props.onSubmit([
-                        {id: "D34B2220-76AC-32BC-5454-6FD51DEC7588", answer: 'dslfdl jdlkfj dslkf'},
-                        {id: "C56A4180-65AA-42EC-A945-5FD21DEC0538", answer: 'dslfdl jdlkfj dslkf'}])}*/
+                    onPress={() => {
+                        let answers = Object.keys(this.state.answers).map((index) => {
+                            return {id: index, answer: this.state.answers[index]}
+                        });
+                        this.sendWithLocation({id: this.state.id, answers: answers});
+                    }}
                     text70
                     white
                     background-orange30
