@@ -1,6 +1,6 @@
 import React from 'react';
 import Questionnaire from "../../components/Questionnaire";
-import {Alert} from "react-native";
+import {awaitFetchPostWithToken} from "../../javascript/htmlFetch";
 
 
 export default class DetailsScreen extends React.Component {
@@ -9,8 +9,9 @@ export default class DetailsScreen extends React.Component {
         return (
             <Questionnaire
                 pathToFetch='user/defaultQuestionnaire'
-                //on submit send by post to server
-                onSubmit={(res) => Alert.alert(JSON.stringify(res))}/>
+                onSubmit={(res) =>
+                    awaitFetchPostWithToken('user/questionnaire/submit', res, false)
+                }/>
         );
     }
 }
