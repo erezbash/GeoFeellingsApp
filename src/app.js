@@ -31,6 +31,7 @@ export async function clearToken() {
 }
 
 export function startApp(root) {
+
     switch (root) {
         case 'login':
             Navigation.startSingleScreenApp({
@@ -55,7 +56,15 @@ export function startApp(root) {
                         icon: require('../img/done.png'),
                         screen: 'example.Details',
                         title: 'Questionnaire'
+                    },
+                    {
+                        label: 'Notifications',
+                        icon: require('../img/tabs/notifications.png'),
+                        selectedIcon: require('../img/tabs/notificationsSelected.png'),
+                        screen: 'example.NotificationsScreen',
+                        title: 'Notifications'
                     }
+
                 ]
             });
             return;

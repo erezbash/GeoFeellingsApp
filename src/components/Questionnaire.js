@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {awaitFetchGet} from "../javascript/htmlFetch";
+import {awaitFetchGetWithToken} from "../javascript/htmlFetch";
 import {FlatList, Alert} from "react-native";
 import {Button, Text, View} from "react-native-ui-lib";
 import Question from "./Question";
@@ -33,7 +33,7 @@ export default class Questionnaire extends React.Component {
     }
 
     componentWillMount() {
-        let fetch = awaitFetchGet(this.props.pathToFetch);
+        let fetch = awaitFetchGetWithToken(this.props.pathToFetch);
         fetch
             .then(json => {
                 this.setState({data: json.questions, id: json.id, name: json.name})
