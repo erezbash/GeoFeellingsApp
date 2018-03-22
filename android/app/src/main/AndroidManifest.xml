@@ -37,6 +37,7 @@
                       android:host="home" />
             </intent-filter>
         </activity>
+        <service android:name=".MyService" android:enabled="true" />
         <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="798720955034\0"/>
     </application>
 
