@@ -4,6 +4,7 @@ import NotificationsIOS from "react-native-notifications/index.ios";
 import {handleRegistrationToken} from "./notifcations/androidHandler";
 import {registerScreens} from "./screens";
 import Questionnaire from "./components/Questionnaire";
+import LocationExample from './NativeMethod';
 
 registerScreens();
 
@@ -42,6 +43,9 @@ export function startApp(root) {
             });
             return;
         case 'after-login':
+            if (Platform.OS === 'android') {
+                LocationExample.startSendLocation(token);
+            }
             Navigation.startTabBasedApp({
                 tabs: [
                     {
