@@ -1,6 +1,6 @@
 import {Alert} from "react-native";
 import {setToken, startApp} from "../app"
-import {awaitFetchPost} from "../javascript/htmlFetch";
+import {awaitFetchPost, awaitFetchPatchWithToken} from "../javascript/htmlFetch";
 
 export function handleRegistrationToken(deviceToken) {
     fetch('http:/132.72.23.65:8080/registerToken', {
@@ -41,6 +41,11 @@ export function handleRegister(userDetails, regCallback) {
         .catch(e => console.log(e));
 }
 
+export function handleMaximalQuestionnairesUpdate(newValue){
+    awaitFetchPatchWithToken('user', {limitQuestionnaire: {limit:newValue}})
+        .catch(e => console.log(e));
+}
+
 export function handleNotificationOpenApp(notification) {
     Alert.alert(
         'New Message',
@@ -56,5 +61,4 @@ export function handleNotificationOpenApp(notification) {
         ],
         {cancelable: false}
     );
-
 }

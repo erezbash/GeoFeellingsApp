@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React from 'react';
-import {View, TextInput, Text, Button} from 'react-native-ui-lib';
+import {Image, ScrollView} from "react-native";
 import {startApp, clearToken} from "../../app";
 import TwitterLogin from "../../components/TwitterLogin";
-import {Image, ScrollView} from "react-native";
-
+import {View, TextInput, Text, Button, Picker} from 'react-native-ui-lib';
+import {handleMaximalQuestionnairesUpdate} from "../../notifcations/androidHandler";
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class HomeScreen extends React.Component {
             latitude: "",
             longitude: "",
             error: "",
+            maximalQuestionnaires: ""
         };
     }
 
@@ -23,12 +25,18 @@ export default class HomeScreen extends React.Component {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                     error: "",
+                    maximalQuestionnaires:""
                 });
             },
             () => {
             },
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
         );
+    }
+
+    updateMaximalQuestionnaires(value) {
+        this.setState({maximalQuestionnaires: value});
+        handleMaximalQuestionnairesUpdate(value);
     }
 
     render() {
@@ -62,17 +70,34 @@ export default class HomeScreen extends React.Component {
                     <Text>Age: 36</Text>
                     <Text>Latitude: {this.state.latitude}</Text>
                     <Text>Longitude: {this.state.longitude}</Text>
+                    <Text>Minimal Questionnaires : {this.state.maximalQuestionnaires} </Text>
+                    <Picker
+                        containerStyle={{marginBottom: 5}}
+                        placeholder="Update Maximal Questionnaires Amount"
+                        //value={this.state.minimalQuestionnaires} //todo: casuing error right now
+                        enableModalBlur={true}
+                        onChange={item => this.updateMaximalQuestionnaires(item.value)}
+                        topBarProps={{title: 'Select Value'}}
+                    >
+                        <Picker.Item
+                            key = "Unlimited"
+                            value={{label: "Unlimited", value: null}}
+                        />
+                        {_.range(2, 24).map(option =>
+                            <Picker.Item
+                               key = {option}
+                               value = {{label: option, value: option}}
+                            />,
+                        )}
+
+                    </Picker>
                 </View>
                 <View padding-10>
                     <Text text50>Social Networks:</Text>
                     <TwitterLogin/>
                 </View>
-
-
             </View>
             </ScrollView>
-
-
         );
     }
 }

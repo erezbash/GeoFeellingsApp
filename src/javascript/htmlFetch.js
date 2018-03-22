@@ -1,4 +1,3 @@
-import {AsyncStorage} from "react-native";
 import {token} from "../app";
 
 const BaseUrl = 'http:/132.72.23.65:8080/api/';
@@ -12,6 +11,18 @@ export async function awaitFetchPost(suffix, body) {
         },
         body: JSON.stringify(body)});
 
+    return await response.json();
+}
+
+export async function awaitFetchPatchWithToken(suffix, body){
+    let response = await fetch(BaseUrl + suffix, {
+        method: "PATCH",
+        headers: {
+            Accept: 'application/json',
+            userId: token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)});
     return await response.json();
 }
 
