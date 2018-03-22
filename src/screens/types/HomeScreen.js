@@ -4,7 +4,7 @@ import {Image, ScrollView} from "react-native";
 import {startApp, clearToken} from "../../app";
 import TwitterLogin from "../../components/TwitterLogin";
 import {View, TextInput, Text, Button, Picker} from 'react-native-ui-lib';
-import {handleMaximalQuestionnairesUpdate} from "../../notifcations/androidHandler";
+import {handleMaximalQuestionnairesUpdate, handleGetUserInfo} from "../../notifcations/androidHandler";
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -14,23 +14,27 @@ export default class HomeScreen extends React.Component {
             latitude: "",
             longitude: "",
             error: "",
-            maximalQuestionnaires: ""
+            maximalQuestionnaires: "",
+            age: "",
+            name: "",
+            gender: ""
         };
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
+        this.getAndUpdateUserProfile();
+    }
+
+    getAndUpdateUserProfile(){
+        handleGetUserInfo(
+            (userProfile) =>{
                 this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    error: "",
-                    maximalQuestionnaires:""
-                });
-            },
-            () => {
-            },
-            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+                    age: userProfile.age,
+                    name: userProfile.userName,
+                    gender: userProfile.gender,
+                    maximalQuestionnaires: userProfile.limitQuestionnaire === null ? "Unlimited" : userProfile.limitQuestionnaire
+                })
+            }
         );
     }
 
@@ -45,7 +49,7 @@ export default class HomeScreen extends React.Component {
             <View flex paddingT-5 top>
                 <View center>
                     <Text blue50 text20>Profile</Text>
-                    <Text text30>James Bond</Text>
+                    <Text text30>{this.state.name}</Text>
                     <Image
                         style={{borderRadius:50, width: 100, height: 100}}
                         source={require('../../../img/defaultAvatar.png')} />
@@ -66,15 +70,13 @@ export default class HomeScreen extends React.Component {
                 </View>
                 <View padding-10>
                     <Text text50>Details:</Text>
-                    <Text>Gender: Male</Text>
-                    <Text>Age: 36</Text>
-                    <Text>Latitude: {this.state.latitude}</Text>
-                    <Text>Longitude: {this.state.longitude}</Text>
+                    <Text>Gender: {this.state.gender}</Text>
+                    <Text>Age: {this.state.age}</Text>
                     <Text>Minimal Questionnaires : {this.state.maximalQuestionnaires} </Text>
                     <Picker
                         containerStyle={{marginBottom: 5}}
                         placeholder="Update Maximal Questionnaires Amount"
-                        //value={this.state.minimalQuestionnaires} //todo: casuing error right now
+                        //value={this.state.maximalQuestionnaires} //todo: casuing error right now
                         enableModalBlur={false}
                         onChange={item => this.updateMaximalQuestionnaires(item)}
                         topBarProps={{title: 'Select Value'}}

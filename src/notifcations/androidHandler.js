@@ -1,6 +1,6 @@
 import {Alert} from "react-native";
 import {setToken, startApp} from "../app"
-import {awaitFetchPost, awaitFetchPatchWithToken} from "../javascript/htmlFetch";
+import {awaitFetchPost, awaitFetchPatchWithToken, awaitFetchGetWithToken} from "../javascript/htmlFetch";
 
 export function handleRegistrationToken(deviceToken) {
     fetch('http:/132.72.23.65:8080/registerToken', {
@@ -43,6 +43,12 @@ export function handleRegister(userDetails, regCallback) {
 
 export function handleMaximalQuestionnairesUpdate(newValue){
     awaitFetchPatchWithToken('user', {limitQuestionnaire: {limit:newValue}})
+        .catch(e => console.log(e));
+}
+
+export function handleGetUserInfo(callback){
+    awaitFetchGetWithToken('user')
+        .then(userProfile => callback(userProfile))
         .catch(e => console.log(e));
 }
 
