@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {awaitFetchGetWithToken} from "../javascript/htmlFetch";
-import {FlatList, Alert} from "react-native";
+import {FlatList} from "react-native";
 import {Button, Text, View} from "react-native-ui-lib";
 import Question from "./Question";
 

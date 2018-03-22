@@ -1,14 +1,12 @@
 import React from 'react';
-import Questionnaire from "../../components/Questionnaire";
+import {FlatList} from "react-native";
+import {Button, Text, View} from "react-native-ui-lib";
 import {awaitFetchGetWithToken} from "../../javascript/htmlFetch";
-import {Text} from "react-native-ui-lib";
-import DetailsScreen from "./DetailsScreen";
-
 
 export default class NotificationsScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {haveWaitingQuestionnaire: undefined, qId: undefined};
+        this.state = {haveWaitingQuestionnaire: undefined, qIds: undefined};
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
 
@@ -23,10 +21,10 @@ export default class NotificationsScreen extends React.Component {
 
     checkForNotification() {
         awaitFetchGetWithToken('user/questionnaire/waiting').then(response => {
-            if (response.id === null)
-                this.setState({haveWaitingQuestionnaire: undefined, qId: undefined});
+            if (response.ids.length === 0)
+                this.setState({haveWaitingQuestionnaire: undefined, qIds: undefined});
             else
-                this.setState({haveWaitingQuestionnaire: 1, qId: response.id});
+                this.setState({haveWaitingQuestionnaire: response.ids.length, qIds: response.ids});
         })
     }
 
@@ -37,10 +35,27 @@ export default class NotificationsScreen extends React.Component {
                 badge: this.state.haveWaitingQuestionnaire
             });
             return (
-                <Questionnaire
-                    pathToFetch={'user/questionnaire/' + this.state.qId}
-                    onSubmit={(res) => DetailsScreen.onSubmit(res)
-                    }/>
+                <FlatList
+                    keyExtractor={(item, index) => index}
+                    ItemSeparatorComponent={() => <View padding-10/>}
+                    data={this.state.qIds}
+                    renderItem={({item}) =>
+                        <Button
+                            onPress={() => {
+                                this.props.navigator.push({
+                                    screen: 'example.QuestionnaireScreen',
+                                    passProps: {qId: item}
+                                });
+                            }}
+                            text70
+                            white
+                            background-orange30
+                            label={item}/>}
+                />
+                // <Questionnaire
+                //     pathToFetch={'user/questionnaire/' + this.state.qIds}
+                //     onSubmit={(res) => DetailsScreen.onSubmit(res)
+                //     }/>
             );
         } else {
             return (<Text>Not have no new notifications</Text>)
