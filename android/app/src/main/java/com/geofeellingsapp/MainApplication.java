@@ -28,6 +28,7 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
             new RNTPackage(),
+            new LocationReactPackage(),
                 new RNNotificationsPackage(MainApplication.this));
     }
 
