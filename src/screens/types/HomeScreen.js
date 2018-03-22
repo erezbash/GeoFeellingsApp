@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import {ScrollView} from "react-native";
+import {ScrollView, Platform} from "react-native";
 import {startApp, clearToken} from "../../app";
 import TwitterLogin from "../../components/TwitterLogin";
 import {View, TextInput, Text, Button, Picker, Image} from 'react-native-ui-lib';
