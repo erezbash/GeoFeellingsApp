@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
-import {Image, ScrollView} from "react-native";
+import {ScrollView} from "react-native";
 import {startApp, clearToken} from "../../app";
 import TwitterLogin from "../../components/TwitterLogin";
-import {View, TextInput, Text, Button, Picker} from 'react-native-ui-lib';
+import {View, TextInput, Text, Button, Picker, Image} from 'react-native-ui-lib';
 import {handleMaximalQuestionnairesUpdate, handleGetUserInfo} from "../../notifcations/androidHandler";
+import tagIcon from '../../../img/edit.png';
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class HomeScreen extends React.Component {
             latitude: "",
             longitude: "",
             error: "",
-            maximalQuestionnaires: "",
+            maximalQuestionnaires: {label: "", value: ""},
             age: "",
             name: "",
             gender: ""
@@ -32,14 +33,15 @@ export default class HomeScreen extends React.Component {
                     age: userProfile.age,
                     name: userProfile.userName,
                     gender: userProfile.gender,
-                    maximalQuestionnaires: userProfile.limitQuestionnaire === null ? "Unlimited" : userProfile.limitQuestionnaire
+                    maximalQuestionnaires: userProfile.limitQuestionnaire === null ?
+                        {label: "Unlimited", value: null} : {label: userProfile.limitQuestionnaire, value: userProfile.limitQuestionnaire}
                 })
             }
         );
     }
 
     updateMaximalQuestionnaires(item) {
-        this.setState({maximalQuestionnaires: item.label});
+        this.setState({maximalQuestionnaires: item});
         handleMaximalQuestionnairesUpdate(item.value);
     }
 
@@ -72,14 +74,23 @@ export default class HomeScreen extends React.Component {
                     <Text text50>Details:</Text>
                     <Text>Gender: {this.state.gender}</Text>
                     <Text>Age: {this.state.age}</Text>
-                    <Text>Minimal Questionnaires : {this.state.maximalQuestionnaires} </Text>
                     <Picker
-                        containerStyle={{marginBottom: 5}}
-                        placeholder="Update Maximal Questionnaires Amount"
-                        //value={this.state.maximalQuestionnaires} //todo: casuing error right now
+                        value={this.state.maximalQuestionnaires}
                         enableModalBlur={false}
                         onChange={item => this.updateMaximalQuestionnaires(item)}
                         topBarProps={{title: 'Select Value'}}
+                        renderPicker={({label}) => {
+                            return (
+                                <View row>
+                                    <Text>Max Questionnaires:</Text>
+                                    <Image
+                                        style={{height: 16, width: 18, resizeMode: 'contain'}}
+                                        source={tagIcon}
+                                    />
+                                    <Text>{label}</Text>
+                                </View>
+                            );
+                        }}
                     >
                         <Picker.Item
                             key = "Unlimited"
