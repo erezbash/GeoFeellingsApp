@@ -34,9 +34,9 @@ export default class HomeScreen extends React.Component {
         );
     }
 
-    updateMaximalQuestionnaires(value) {
-        this.setState({maximalQuestionnaires: value});
-        handleMaximalQuestionnairesUpdate(value);
+    updateMaximalQuestionnaires(item) {
+        this.setState({maximalQuestionnaires: item.label});
+        handleMaximalQuestionnairesUpdate(item.value);
     }
 
     render() {
@@ -75,8 +75,8 @@ export default class HomeScreen extends React.Component {
                         containerStyle={{marginBottom: 5}}
                         placeholder="Update Maximal Questionnaires Amount"
                         //value={this.state.minimalQuestionnaires} //todo: casuing error right now
-                        enableModalBlur={true}
-                        onChange={item => this.updateMaximalQuestionnaires(item.value)}
+                        enableModalBlur={false}
+                        onChange={item => this.updateMaximalQuestionnaires(item)}
                         topBarProps={{title: 'Select Value'}}
                     >
                         <Picker.Item
