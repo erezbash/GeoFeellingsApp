@@ -6,6 +6,7 @@ import TwitterLogin from "../../components/TwitterLogin";
 import {View, TextInput, Text, Button, Picker, Image} from 'react-native-ui-lib';
 import {handleMaximalQuestionnairesUpdate, handleGetUserInfo} from "../../notifcations/androidHandler";
 import tagIcon from '../../../img/edit.png';
+import LocationExample from '../../NativeMethod';
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -58,6 +59,9 @@ export default class HomeScreen extends React.Component {
                     <Button
                         onPress={() => {
                             clearToken();
+                            if (Platform.OS === 'android') {
+                                LocationExample.stopLocation();
+                            }
                             startApp('login')
                         }}
                         text90
