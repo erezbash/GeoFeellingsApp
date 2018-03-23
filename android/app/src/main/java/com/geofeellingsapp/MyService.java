@@ -107,7 +107,7 @@ public class MyService extends Service{
 
     public void postData(double latitude, double longitude, String user) {
         final String userId = user;
-        String url = "http://132.72.23.65:8080/api/admin/user";
+        String url = "http://132.72.23.65:8080/api/user";
         JSONObject jsonBody = new JSONObject();
         JSONObject jsonLocation = new JSONObject();
         try {
