@@ -61,12 +61,12 @@ public class LocationModule extends ReactContextBaseJavaModule {
 
              if (!isWorking){
                  Log.v("ReactNative", "---------startAlarmManager---------");
-                 context.startService(new Intent(context, MyService.class));
+                 Bundle bundle = new Bundle();
+                 bundle.putCharSequence("extraData", user);
+                 context.startService(new Intent(context, MyService.class).putExtras(bundle));
                  Calendar cal = Calendar.getInstance();
                  Intent intent = new Intent(context, MyService.class);
 
-                 Bundle bundle = new Bundle();
-                 bundle.putCharSequence("extraData", user);
                  intent.putExtras(bundle);
 
                  PendingIntent pintent = PendingIntent.getService(context, 0, intent, 0);
