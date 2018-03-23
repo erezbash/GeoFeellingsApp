@@ -44,7 +44,7 @@ export function startApp(root) {
             return;
         case 'after-login':
             if (Platform.OS === 'android') {
-                //LocationExample.startSendLocation(token);
+                LocationExample.startSendLocation(token);
             }
             Navigation.startTabBasedApp({
                 tabs: [
