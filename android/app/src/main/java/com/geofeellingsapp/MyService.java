@@ -88,14 +88,15 @@ public class MyService extends Service{
                     }
                 }
             }
+			if ((latitude != 0) || (longitude != 0)) {
+				Bundle bundle = intent.getExtras();
+				userId = (String) bundle.getCharSequence("extraData");
+				Log.v("ReactNative", "---------latitude---------" + latitude);
+				Log.v("ReactNative", "---------longitude---------" + longitude);
+				Log.v("ReactNative", "------user------" + userId);
+				postData(latitude, longitude, userId);
+			}
         }
-        //userId = System.getProperty("USERID");
-        Bundle bundle = intent.getExtras();
-        userId = (String) bundle.getCharSequence("extraData");
-        Log.v("ReactNative", "---------latitude---------" + latitude);
-        Log.v("ReactNative", "---------longitude---------" + longitude);
-        Log.v("ReactNative", "------user------" + userId);
-        postData(latitude, longitude, userId);
         stopSelf();
     }
     @Override
