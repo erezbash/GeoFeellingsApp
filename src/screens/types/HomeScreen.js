@@ -7,6 +7,7 @@ import {View, TextInput, Text, Button, Picker, Image} from 'react-native-ui-lib'
 import {handleMaximalQuestionnairesUpdate, handleGetUserInfo} from "../../notifcations/androidHandler";
 import tagIcon from '../../../img/edit.png';
 import LocationExample from '../../NativeMethod';
+import FacebookLogin from "../../components/FacebookLogin";
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -112,6 +113,7 @@ export default class HomeScreen extends React.Component {
                 <View padding-10>
                     <Text text50>Social Networks:</Text>
                     <TwitterLogin/>
+                    <FacebookLogin/>
                 </View>
             </View>
             </ScrollView>

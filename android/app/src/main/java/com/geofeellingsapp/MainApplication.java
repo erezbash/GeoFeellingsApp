@@ -3,6 +3,7 @@ package com.geofeellingsapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import ga.piroro.rnt.RNTPackage;
 import com.wix.reactnativenotifications.RNNotificationsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,6 +28,7 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+            new FBSDKPackage(),
             new RNTPackage(),
             new LocationReactPackage(),
                 new RNNotificationsPackage(MainApplication.this));
