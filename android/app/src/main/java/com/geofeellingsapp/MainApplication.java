@@ -11,11 +11,17 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.reactnativenavigation.NavigationApplication;
+import android.os.Bundle;
+import com.facebook.FacebookSdk;
+import com.facebook.CallbackManager;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends NavigationApplication {
+
+    private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
     @Override
     public boolean isDebug() { return BuildConfig.DEBUG; }
@@ -28,7 +34,7 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-            new FBSDKPackage(),
+            new FBSDKPackage(mCallbackManager),
             new RNTPackage(),
             new LocationReactPackage(),
                 new RNNotificationsPackage(MainApplication.this));
@@ -37,5 +43,9 @@ public class MainApplication extends NavigationApplication {
     @Override
     public String getJSMainModuleName() {
         return "index";
+    }
+
+    protected static CallbackManager getCallbackManager() {
+        return mCallbackManager;
     }
 }
