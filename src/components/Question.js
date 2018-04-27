@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {Colors, Text, TextArea, View} from "react-native-ui-lib";
 import RadioButtonGroup from "./RadioButtonGroup";
-
+import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
 export default class Question extends React.Component {
 
     static propTypes = {
@@ -37,6 +37,16 @@ export default class Question extends React.Component {
                                 }
                             />
                         </View>
+                    </View>);
+            case 'MULTIPLE':
+                return(
+                    <View style={{backgroundColor: Colors.dark80, borderWidth: 1.5, borderRadius: 20}}>
+                        <MultipleChoiceQuestion
+                            questionName={this.props.question.data.questionString}
+                            answers={this.props.question.data.radioOptions}
+                            id={this.props.question.id}
+                            onUpdate={this.props.onUpdate}
+                        />
                     </View>);
         }
     }
