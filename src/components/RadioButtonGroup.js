@@ -7,6 +7,7 @@ class RadioButtonGroup extends React.Component {
 
     constructor(props) {
         super(props);
+        this.props.callBackOnUpdate({id: this.props.id, answer: this.props.numberOfRadios === 5? 3 : 4});
     }
 
     select(i) {
