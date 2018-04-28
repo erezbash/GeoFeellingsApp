@@ -18,7 +18,7 @@ export default class Question extends React.Component {
                             name={this.props.question.data.questionString}
                             numberOfRadios={this.props.question.data.numOfOptions}
                             id={this.props.question.id}
-                            onUpdate={this.props.onUpdate}
+                            callBackOnUpdate={this.props.onUpdate}
                         />
                     </View>);
             case 'OPEN':
