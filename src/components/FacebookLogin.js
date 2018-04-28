@@ -1,8 +1,9 @@
 import React from "react";
 import {auth} from "react-native-twitter";
 import {awaitFetchDeleteWithToken, awaitFetchGetWithToken, awaitFetchPostWithToken} from "../javascript/htmlFetch";
-import {View} from "react-native-ui-lib";
-import {AccessToken, LoginButton} from 'react-native-fbsdk'
+import {Button, View} from "react-native-ui-lib";
+import {AccessToken, LoginManager} from 'react-native-fbsdk'
+const facebook = require('../../img/facebook.png');
 import {Alert} from "react-native";
 
 export default class FacebookLogin extends React.Component {
@@ -54,28 +55,37 @@ export default class FacebookLogin extends React.Component {
                 .then(() => this.disconnectState()))
     }
 
+    handleFacebookLogin () {
+        LoginManager.logInWithReadPermissions(['public_profile', 'user_posts']).then(
+            function (result) {
+                if (result.isCancelled) {
+                    console.log('Login cancelled')
+                } else {
+                    AccessToken.getCurrentAccessToken().then(
+                        (data) => {
+                            awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false);
+                        });
+                }
+            },
+            function (error) {
+                console.log('Login fail with error: ' + error)
+            }
+        )
+    }
+
     render() {
         return (
             <View>
-                <LoginButton
-                    readPermissions={["user_posts"]}
-                    onLoginFinished={
-                        (error, result) => {
-                            console.log(JSON.stringify(error) + "\n" + JSON.stringify(result));
-                            if (error) {
-                                Alert.alert("Login failed with error: " + result.error);
-                            } else if (result.isCancelled) {
-                                Alert.alert("Login was cancelled");
-                            } else {
-                                AccessToken.getCurrentAccessToken().then(
-                                    (data) => {
-                                        awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false);
-                                    });
-                                // alert("Login was successful with permissions: " + result.grantedPermissions)
-                            }
-                        }
-                    }
-                    onLogoutFinished={() => Alert.alert("User logged out")}/>
+                <Button
+                    onPress={this.handleFacebookLogin}
+                    label="Connect Facebook"
+                    text90
+                    labelStyle={{fontWeight: '500'}}
+                    style={{marginBottom: 20, width: 150}}
+                    size="small"
+                    enableShadow
+                    iconSource={facebook}
+                    white/>
             </View>)
     }
 }

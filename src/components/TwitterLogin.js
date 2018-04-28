@@ -58,7 +58,7 @@ export default class TwitterLogin extends React.Component {
                 onPress={() => this.doWhatNeedToDo()}
                 text90
                 labelStyle={{fontWeight: '500'}}
-                style={{marginBottom: 20, width: 200}}
+                style={{marginBottom: 20, width: 150}}
                 size="small"
                 enableShadow
                 iconSource={twitter}
