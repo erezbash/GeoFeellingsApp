@@ -8,7 +8,7 @@ import {handleMaximalQuestionnairesUpdate, handleGetUserInfo} from "../../notifc
 import tagIcon from '../../../img/edit.png';
 import LocationExample from '../../NativeMethod';
 import FacebookLogin from "../../components/FacebookLogin";
-import {StarRating} from "react-native-star-rating";
+import StarRating from 'react-native-star-rating';
 
 export default class HomeScreen extends React.Component {
     static navigatorButtons = {
@@ -87,13 +87,15 @@ export default class HomeScreen extends React.Component {
                     <View center>
                         <View padding-10 center bg-red50 style={{alignSelf: 'stretch'}}>
                             <Avatar
+                                isOnline={true}
                                 size={150}
                                 imageSource={imageSource}/>
                             <Text white text30>{this.state.name}</Text>
                             <StarRating
-                                disabled={false}
-                                maxStars={5}
-                                rating={2}
+                                fullStarColor={'gold'}
+                                disabled={true}
+                                maxStars={7}
+                                rating={3.8}
                             />
                         </View>
                     </View>

@@ -141,6 +141,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
     compile project(':react-native-fbsdk')
     compile project(':react-native-twitter')
     compile project(':react-native-notifications')
