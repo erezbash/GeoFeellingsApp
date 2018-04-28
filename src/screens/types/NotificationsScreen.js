@@ -6,7 +6,7 @@ import {awaitFetchGetWithToken} from "../../javascript/htmlFetch";
 export default class NotificationsScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {haveWaitingQuestionnaire: undefined, qIds: undefined};
+        this.state = {haveWaitingQuestionnaire: undefined, questionnaires: undefined};
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
 
@@ -21,10 +21,10 @@ export default class NotificationsScreen extends React.Component {
 
     checkForNotification() {
         awaitFetchGetWithToken('user/questionnaire/waiting').then(response => {
-            if (response.ids.length === 0)
-                this.setState({haveWaitingQuestionnaire: undefined, qIds: undefined});
+            if (response.questionnaires.length === 0)
+                this.setState({haveWaitingQuestionnaire: undefined, questionnaires: undefined});
             else
-                this.setState({haveWaitingQuestionnaire: response.ids.length, qIds: response.ids});
+                this.setState({haveWaitingQuestionnaire: response.questionnaires.length, questionnaires: response.questionnaires});
         })
     }
 
@@ -35,30 +35,28 @@ export default class NotificationsScreen extends React.Component {
                 badge: this.state.haveWaitingQuestionnaire
             });
             return (
+                <View paddingH-25 paddingT-20>
                 <FlatList
                     keyExtractor={(item, index) => index}
                     ItemSeparatorComponent={() => <View padding-10/>}
-                    data={this.state.qIds}
+                    data={this.state.questionnaires}
                     renderItem={({item}) =>
                         <Button
                             onPress={() => {
                                 this.props.navigator.push({
                                     screen: 'example.QuestionnaireScreen',
-                                    passProps: {qId: item}
+                                    passProps: {questionnaire: item}
                                 });
                             }}
                             text70
                             white
                             background-orange30
-                            label={item}/>}
+                            label={item.name}/>}
                 />
-                // <Questionnaire
-                //     pathToFetch={'user/questionnaire/' + this.state.qIds}
-                //     onSubmit={(res) => DetailsScreen.onSubmit(res)
-                //     }/>
+                </View>
             );
         } else {
-            return (<Text>Not have no new notifications</Text>)
+            return (<Text>Nothing new</Text>)
         }
     }
 }

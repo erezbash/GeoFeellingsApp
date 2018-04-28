@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {Colors, Text, TextArea, View} from "react-native-ui-lib";
+import {Colors, Text, TextInput, View} from "react-native-ui-lib";
 import RadioButtonGroup from "./RadioButtonGroup";
 import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
 export default class Question extends React.Component {
@@ -26,7 +26,9 @@ export default class Question extends React.Component {
                     <View style={{backgroundColor: Colors.dark80, borderWidth: 1.5, borderRadius: 20}}>
                         <View padding-15>
                             <Text text40>{this.props.question.data.questionString}</Text>
-                            <TextArea
+                            <TextInput
+                                hideUnderline
+                                containerStyle={{marginBottom: 10}}
                                 placeholder="write something.."
                                 onChangeText={(text) => {
                                     this.props.onUpdate({

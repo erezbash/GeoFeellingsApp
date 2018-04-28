@@ -12,9 +12,9 @@ export default class TwitterLogin extends React.Component {
     }
 
     componentDidMount() {
-        awaitFetchGetWithToken('user/twitter')
+        awaitFetchGetWithToken('user/tokens')
             .then(res => {
-                if (res !== null) {
+                if (res.twitter !== null) {
                     this.disconnectState();
                 } else {
                     this.connectState();
@@ -58,7 +58,7 @@ export default class TwitterLogin extends React.Component {
                 onPress={() => this.doWhatNeedToDo()}
                 text90
                 labelStyle={{fontWeight: '500'}}
-                style={{marginBottom: 20, width: 150}}
+                style={{marginBottom: 20, width: 200}}
                 size="small"
                 enableShadow
                 iconSource={twitter}

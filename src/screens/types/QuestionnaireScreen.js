@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 export default class QuestionnaireScreen extends React.Component {
 
     static propTypes = {
-        qId: PropTypes.any,
+        questionnaire: PropTypes.any,
     };
 
     render() {
-        const path = 'user/questionnaire/' + this.props.qId;
+        const path = 'user/questionnaire/' + this.props.questionnaire.id;
         return (
             <Questionnaire
                 pathToFetch= {path}

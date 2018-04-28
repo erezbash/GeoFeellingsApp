@@ -20,7 +20,8 @@ export default class HomeScreen extends React.Component {
             maximalQuestionnaires: {label: "", value: ""},
             age: "",
             name: "",
-            gender: ""
+            gender: "",
+            image: ""
         };
     }
 
@@ -32,6 +33,7 @@ export default class HomeScreen extends React.Component {
         handleGetUserInfo(
             (userProfile) =>{
                 this.setState({
+                    image: userProfile.image === null? "": userProfile.image,
                     age: userProfile.age,
                     name: userProfile.userName,
                     gender: userProfile.gender,
@@ -48,6 +50,7 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
+        const imageSource = this.state.image === "" ? require('../../../img/defaultAvatar.png'): {uri: this.state.image};
         return (
             <ScrollView>
             <View flex paddingT-5 top>
@@ -56,7 +59,7 @@ export default class HomeScreen extends React.Component {
                     <Text text30>{this.state.name}</Text>
                     <Image
                         style={{borderRadius:50, width: 100, height: 100}}
-                        source={require('../../../img/defaultAvatar.png')} />
+                        source={imageSource} />
                     <Button
                         onPress={() => {
                             clearToken();
