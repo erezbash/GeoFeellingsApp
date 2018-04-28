@@ -3,6 +3,7 @@ import {auth} from "react-native-twitter";
 import {awaitFetchDeleteWithToken, awaitFetchGetWithToken, awaitFetchPostWithToken} from "../javascript/htmlFetch";
 import {View} from "react-native-ui-lib";
 import {AccessToken, LoginButton} from 'react-native-fbsdk'
+import {Alert} from "react-native";
 
 export default class FacebookLogin extends React.Component {
 
@@ -60,20 +61,21 @@ export default class FacebookLogin extends React.Component {
                     readPermissions={["user_posts"]}
                     onLoginFinished={
                         (error, result) => {
-                            AccessToken.getCurrentAccessToken().then(
-                                (data) => {
-                                    awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false);
-                                });
+                            console.log(JSON.stringify(error) + "\n" + JSON.stringify(result));
                             if (error) {
-                                alert("Login failed with error: " + result.error);
+                                Alert.alert("Login failed with error: " + result.error);
                             } else if (result.isCancelled) {
-                                alert("Login was cancelled");
+                                Alert.alert("Login was cancelled");
                             } else {
+                                AccessToken.getCurrentAccessToken().then(
+                                    (data) => {
+                                        awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false);
+                                    });
                                 // alert("Login was successful with permissions: " + result.grantedPermissions)
                             }
                         }
                     }
-                    onLogoutFinished={() => alert("User logged out")}/>
+                    onLogoutFinished={() => Alert.alert("User logged out")}/>
             </View>)
     }
 }

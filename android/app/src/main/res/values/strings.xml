@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GeoFeellingsApp</string>
     <string name="facebook_app_id">217791078979831</string>
+    <string name="fb_login_protocol_scheme">fb217791078979831</string>
 </resources>
