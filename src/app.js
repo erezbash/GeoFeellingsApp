@@ -53,7 +53,7 @@ export function startApp(root) {
                         icon: require('../img/tabs/profile.png'),
                         selectedIcon: require('../img/tabs/profileSelected.png'),
                         screen: 'example.Home',
-                        title: 'Profile View'
+                        title: 'Profile'
                     },
                     {
                         label: 'Questionnaire',

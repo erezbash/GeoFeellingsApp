@@ -15,7 +15,7 @@ export default class QuestionnaireScreen extends React.Component {
         const path = 'user/questionnaire/' + this.props.questionnaire.id;
         return (
             <Questionnaire
-                pathToFetch= {path}
+                pathToFetch={path}
                 onSubmit={(res) => QuestionnaireScreen.onSubmit(res)}
             />
         );
@@ -23,8 +23,14 @@ export default class QuestionnaireScreen extends React.Component {
 
     static onSubmit(res) {
         awaitFetchPostWithToken('user/questionnaire/submit', res, false).then(() => {
-            Alert.alert("Submitted", "Have a Great Day :)");
-            startApp('after-login');
+            Alert.alert(
+                "Submitted",
+                "Have a Great Day :)",
+                [
+                    {text: 'Back Home', onPress: () => startApp('after-login')},
+                ],
+                { cancelable: false }
+            );
         });
     }
 }

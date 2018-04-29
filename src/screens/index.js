@@ -6,8 +6,10 @@ import RegisterScreen from "./types/RegisterScreen";
 import RegisterQuestionnaire from "./types/RegisterQuestionnaire";
 import NotificationsScreen from "./types/NotificationsScreen";
 import QuestionnaireScreen from "./types/QuestionnaireScreen";
+import SettingsScreen from "./types/SettingsScreen";
 
 export function registerScreens() {
+    Navigation.registerComponent('example.SettingsScreen', () => SettingsScreen);
     Navigation.registerComponent('example.Home', () => HomeScreen);
     Navigation.registerComponent('example.Details', () => DetailsScreen);
     Navigation.registerComponent('example.LoginScreen', () => LoginScreen);

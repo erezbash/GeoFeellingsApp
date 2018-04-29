@@ -1,11 +1,9 @@
-import _ from 'lodash';
 import React from 'react';
 import {ScrollView, Platform} from "react-native";
 import {startApp, clearToken} from "../../app";
 import TwitterLogin from "../../components/TwitterLogin";
 import {View, TextInput, Text, Button, Picker, Image, Avatar, Colors} from 'react-native-ui-lib';
 import {handleMaximalQuestionnairesUpdate, handleGetUserInfo} from "../../notifcations/androidHandler";
-import tagIcon from '../../../img/edit.png';
 import LocationExample from '../../NativeMethod';
 import FacebookLogin from "../../components/FacebookLogin";
 import StarRating from 'react-native-star-rating';
@@ -19,8 +17,21 @@ export default class HomeScreen extends React.Component {
                 buttonFontSize: 14,
                 buttonColor: 'red',
                 buttonFontWeight: '600'
-            }
-        ]
+            },
+        ],
+        leftButtons: [
+            {
+                id: 'accept',
+                icon: require('../../../img/settings.png'),
+                buttonFontSize: 14,
+                buttonColor: 'red',
+                buttonFontWeight: '600'
+            },
+        ],
+    };
+
+    static navigatorStyle = {
+        navBarTitleTextCentered: true
     };
 
     constructor(props) {
@@ -41,7 +52,18 @@ export default class HomeScreen extends React.Component {
 
     onNavigatorEvent(event) {
         if (event.type === 'NavBarButtonPress' && event.id === 'Logout')
-            this.pressLogout()
+            this.pressLogout();
+        if (event.type === 'NavBarButtonPress' && event.id === 'accept') {
+            const f = (value) => this.setState({maximalQuestionnaires: value})
+            this.props.navigator.push({
+                passProps: {
+                    maximalQuestionnaires: this.state.maximalQuestionnaires,
+                    onClick: f
+                },
+                screen: "example.SettingsScreen",
+                title: "Settings"
+            });
+        }
     }
 
     componentDidMount() {
@@ -55,7 +77,7 @@ export default class HomeScreen extends React.Component {
                     image: userProfile.image === null ? "" : userProfile.image,
                     age: userProfile.age,
                     name: userProfile.userName,
-                    gender: userProfile.gender,
+                    gender: userProfile.gender === 'MALE' ? 'Male' : 'Female',
                     maximalQuestionnaires: userProfile.limitQuestionnaire === null ?
                         {label: "Unlimited", value: null} : {
                             label: userProfile.limitQuestionnaire,
@@ -85,60 +107,29 @@ export default class HomeScreen extends React.Component {
             <ScrollView>
                 <View flex top>
                     <View center>
-                        <View padding-10 center bg-red50 style={{alignSelf: 'stretch'}}>
+                        <View padding-10 center style={{alignSelf: 'stretch'}}>
                             <Avatar
                                 isOnline={true}
                                 size={150}
                                 imageSource={imageSource}/>
-                            <Text white text30>{this.state.name}</Text>
+                            <Text text30>{this.state.name}</Text>
                             <StarRating
                                 fullStarColor={'gold'}
                                 disabled={true}
                                 maxStars={7}
-                                rating={3.8}
+                                rating={3.5}
                             />
                         </View>
                     </View>
-                    <View padding-10>
-                        <Text text50>Details:</Text>
+                    <View padding-10 center>
+                        <Text text50 >Personal Information</Text>
                         <Text>Gender: {this.state.gender}</Text>
                         <Text>Age: {this.state.age}</Text>
-                        <Picker
-                            value={this.state.maximalQuestionnaires}
-                            enableModalBlur={false}
-                            onChange={item => this.updateMaximalQuestionnaires(item)}
-                            topBarProps={{title: 'Select Value'}}
-                            renderPicker={({label}) => {
-                                return (
-                                    <View row>
-                                        <Text>Max Questionnaires:</Text>
-                                        <Image
-                                            style={{height: 16, width: 18, resizeMode: 'contain'}}
-                                            source={tagIcon}
-                                        />
-                                        <Text>{label}</Text>
-                                    </View>
-                                );
-                            }}
-                        >
-                            <Picker.Item
-                                key="Unlimited"
-                                value={{label: "Unlimited", value: null}}
-                            />
-                            {_.range(2, 24).map(option =>
-                                <Picker.Item
-                                    key={option}
-                                    value={{label: option, value: option}}
-                                />,
-                            )}
-
-                        </Picker>
                     </View>
-                    <View padding-10>
-                        <Text text50>Social Networks:</Text>
-                        <TwitterLogin/>
-                        <FacebookLogin/>
-                    </View>
+                    <View padding-10/>
+                    <Text text50 center>Social Networks</Text>
+                    <TwitterLogin/>
+                    <FacebookLogin onClick={() => this.getAndUpdateUserProfile()}/>
                 </View>
             </ScrollView>
         );

@@ -1,7 +1,8 @@
 import React from "react";
 import {auth} from "react-native-twitter";
-import {Button} from "react-native-ui-lib";
+import {Button, View} from "react-native-ui-lib";
 import {awaitFetchDeleteWithToken, awaitFetchGetWithToken, awaitFetchPostWithToken} from "../javascript/htmlFetch";
+
 const twitter = require('../../img/twitter.png');
 
 export default class TwitterLogin extends React.Component {
@@ -29,8 +30,9 @@ export default class TwitterLogin extends React.Component {
     disconnectState() {
         this.setState({label: "Disconnect Twitter"})
     }
+
     doWhatNeedToDo() {
-        if(this.state.label === "Disconnect Twitter")
+        if (this.state.label === "Disconnect Twitter")
             this.disconnectFunction();
         else
             this.connectFunction();
@@ -54,16 +56,19 @@ export default class TwitterLogin extends React.Component {
 
     render() {
         return (
-            <Button
-                onPress={() => this.doWhatNeedToDo()}
-                text90
-                labelStyle={{fontWeight: '500'}}
-                style={{marginBottom: 20, width: 200}}
-                size="small"
-                enableShadow
-                iconSource={twitter}
-                white
-                label={this.state.label}
-            />)
+            <View style={{alignSelf: 'stretch'}}>
+                <Button
+                    onPress={() => this.doWhatNeedToDo()}
+                    text90
+                    borderRadius={0}
+                    labelStyle={{fontWeight: '500'}}
+                    style={{marginBottom: 5}}
+                    size="small"
+                    enableShadow
+                    iconSource={twitter}
+                    white
+                    label={this.state.label}
+                />
+            </View>)
     }
 }

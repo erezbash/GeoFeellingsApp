@@ -4,6 +4,10 @@ import {Button, Text, View} from "react-native-ui-lib";
 import {awaitFetchGetWithToken} from "../../javascript/htmlFetch";
 
 export default class NotificationsScreen extends React.Component {
+    static navigatorStyle = {
+        navBarTitleTextCentered: true
+    };
+
     constructor(props) {
         super(props);
         this.state = {haveWaitingQuestionnaire: undefined, questionnaires: undefined};
@@ -44,6 +48,7 @@ export default class NotificationsScreen extends React.Component {
                         <Button
                             onPress={() => {
                                 this.props.navigator.push({
+                                    title: item.name,
                                     screen: 'example.QuestionnaireScreen',
                                     passProps: {questionnaire: item}
                                 });

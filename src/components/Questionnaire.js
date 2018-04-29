@@ -10,7 +10,8 @@ export default class Questionnaire extends React.Component {
 
     static propTypes = {
         pathToFetch: PropTypes.string.isRequired,
-        onSubmit: PropTypes.func.isRequired
+        onSubmit: PropTypes.func.isRequired,
+        setTitle: PropTypes.func
     };
 
     constructor(props) {
@@ -29,16 +30,15 @@ export default class Questionnaire extends React.Component {
             },
             () => console.log("failed get location"),
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-        )
+        );
     }
 
-    componentWillMount() {
-        let fetch = awaitFetchGetWithToken(this.props.pathToFetch);
-        fetch
-            .then(json => {
-                this.setState({data: json.questions, id: json.id, name: json.name})
-            })
-            .catch(e => console.log(e))
+    async componentWillMount() {
+        let json = await awaitFetchGetWithToken(this.props.pathToFetch);
+        if(this.props.setTitle !== undefined) {
+            this.props.setTitle(json.name)
+        }
+        this.setState({data: json.questions, id: json.id, name: json.name})
     }
 
     sendWithLocation(msg) {
@@ -49,7 +49,6 @@ export default class Questionnaire extends React.Component {
     render() {
         return (
             <View flex padding-5>
-                <Text text40>{this.state.name}</Text>
                 <FlatList
                     keyExtractor={(item, index) => index}
                     ItemSeparatorComponent={() => <View padding-10/>}

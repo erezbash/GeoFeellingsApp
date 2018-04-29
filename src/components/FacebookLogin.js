@@ -2,6 +2,7 @@ import React from "react";
 import {awaitFetchDeleteWithToken, awaitFetchGetWithToken, awaitFetchPostWithToken} from "../javascript/htmlFetch";
 import {Button, View} from "react-native-ui-lib";
 import {AccessToken, LoginManager} from 'react-native-fbsdk'
+import PropTypes from 'prop-types';
 
 const facebook = require('../../img/facebook.png');
 
@@ -11,6 +12,10 @@ export default class FacebookLogin extends React.Component {
         super(props);
         this.state = {label: ""};
     }
+
+    static propTypes = {
+        onClick: PropTypes.any.isRequired
+    };
 
     componentDidMount() {
         awaitFetchGetWithToken('user/tokens')
@@ -33,27 +38,11 @@ export default class FacebookLogin extends React.Component {
 
     disconnectFunction() {
         awaitFetchDeleteWithToken('user/facebook')
-            .then(() => this.connectState())
+            .then(() => {
+                this.connectState();
+                this.props.onClick();
+            })
     }
-
-    // connectFunction() {
-    //     LoginManager.logInWithReadPermissions(['public_profile', 'user_posts'])
-    //         .then(function (result) {
-    //                 if (result.isCancelled) {
-    //                     console.log('Login cancelled')
-    //                 } else {
-    //                     AccessToken.getCurrentAccessToken()
-    //                         .then(function (data) {
-    //                             awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false)
-    //                                 .then(() => this.disconnectState())
-    //                         }.bind(this));
-    //                 }
-    //             }.bind(this),
-    //             function (error) {
-    //                 console.log('Login fail with error: ' + error)
-    //             }
-    //         )
-    // }
 
     async connectFunction() {
         try {
@@ -64,6 +53,7 @@ export default class FacebookLogin extends React.Component {
                 const data = await AccessToken.getCurrentAccessToken();
                 await awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false);
                 this.disconnectState();
+                this.props.onClick();
             }
         } catch (e) {
             console.log('Login fail with error: ' + error)
@@ -80,13 +70,14 @@ export default class FacebookLogin extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={{alignSelf: 'stretch'}}>
                 <Button
                     onPress={() => this.handleFacebookLogin()}
                     label={this.state.label}
+                    borderRadius={0}
                     text90
                     labelStyle={{fontWeight: '500'}}
-                    style={{marginBottom: 20, width: 200}}
+                    style={{marginBottom: 20, backgroundColor: '#3b5998'}}
                     size="small"
                     enableShadow
                     iconSource={facebook}
