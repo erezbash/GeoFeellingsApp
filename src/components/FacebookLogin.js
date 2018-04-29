@@ -36,24 +36,40 @@ export default class FacebookLogin extends React.Component {
             .then(() => this.connectState())
     }
 
-    connectFunction() {
-        LoginManager.logInWithReadPermissions(['public_profile', 'user_posts']).then(
-            function (result) {
-                if (result.isCancelled) {
-                    console.log('Login cancelled')
-                } else {
-                    AccessToken.getCurrentAccessToken()
-                        .then(function(data) {
-                            awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false)
-                                .then(() => this.disconnectState())
-                        }.bind(this));
-                }
-            }.bind(this),
-            function (error) {
-                console.log('Login fail with error: ' + error)
+    // connectFunction() {
+    //     LoginManager.logInWithReadPermissions(['public_profile', 'user_posts'])
+    //         .then(function (result) {
+    //                 if (result.isCancelled) {
+    //                     console.log('Login cancelled')
+    //                 } else {
+    //                     AccessToken.getCurrentAccessToken()
+    //                         .then(function (data) {
+    //                             awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false)
+    //                                 .then(() => this.disconnectState())
+    //                         }.bind(this));
+    //                 }
+    //             }.bind(this),
+    //             function (error) {
+    //                 console.log('Login fail with error: ' + error)
+    //             }
+    //         )
+    // }
+
+    async connectFunction() {
+        try {
+            const {isCancelled} = await LoginManager.logInWithReadPermissions(['public_profile', 'user_posts'])
+            if (isCancelled) {
+                console.log('Login cancelled')
+            } else {
+                const data = await AccessToken.getCurrentAccessToken();
+                await awaitFetchPostWithToken('user/facebook', {token: data.accessToken}, false);
+                this.disconnectState();
             }
-        )
+        } catch (e) {
+            console.log('Login fail with error: ' + error)
+        }
     }
+
 
     handleFacebookLogin() {
         if (this.state.label === "Disconnect Facebook")
