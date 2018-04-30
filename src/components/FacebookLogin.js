@@ -70,15 +70,13 @@ export default class FacebookLogin extends React.Component {
 
     render() {
         return (
-            <View style={{alignSelf: 'stretch'}}>
+            <View padding-5 style={{alignSelf: 'stretch'}}>
                 <Button
                     onPress={() => this.handleFacebookLogin()}
                     label={this.state.label}
-                    borderRadius={0}
                     text90
                     labelStyle={{fontWeight: '500'}}
                     style={{marginBottom: 20, backgroundColor: '#3b5998'}}
-                    size="small"
                     enableShadow
                     iconSource={facebook}
                     white/>

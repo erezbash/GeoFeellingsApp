@@ -56,14 +56,12 @@ export default class TwitterLogin extends React.Component {
 
     render() {
         return (
-            <View style={{alignSelf: 'stretch'}}>
+            <View padding-5 style={{alignSelf: 'stretch'}}>
                 <Button
                     onPress={() => this.doWhatNeedToDo()}
                     text90
-                    borderRadius={0}
                     labelStyle={{fontWeight: '500'}}
                     style={{marginBottom: 5}}
-                    size="small"
                     enableShadow
                     iconSource={twitter}
                     white

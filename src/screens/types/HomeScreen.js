@@ -116,8 +116,8 @@ export default class HomeScreen extends React.Component {
                             <StarRating
                                 fullStarColor={'gold'}
                                 disabled={true}
-                                maxStars={7}
-                                rating={3.5}
+                                maxStars={5}
+                                rating={2.5}
                             />
                         </View>
                     </View>
@@ -127,7 +127,6 @@ export default class HomeScreen extends React.Component {
                         <Text>Age: {this.state.age}</Text>
                     </View>
                     <View padding-10/>
-                    <Text text50 center>Social Networks</Text>
                     <TwitterLogin/>
                     <FacebookLogin onClick={() => this.getAndUpdateUserProfile()}/>
                 </View>
