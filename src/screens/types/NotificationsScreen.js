@@ -8,14 +8,27 @@ export default class NotificationsScreen extends React.Component {
         navBarTitleTextCentered: true
     };
 
+    static navigatorButtons = {
+        rightButtons: [
+            {
+                icon: require('../../../img/reuse.png'),
+                id: 'Refresh',
+                buttonFontSize: 14,
+                buttonFontWeight: '600'
+            },
+        ]
+    };
+
     constructor(props) {
         super(props);
         this.state = {haveWaitingQuestionnaire: undefined, questionnaires: undefined};
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
 
-    onNavigatorEvent() {
+    onNavigatorEvent(event) {
         if (this.state.haveWaitingQuestionnaire === undefined)
+            this.checkForNotification();
+        if (event.type === 'NavBarButtonPress' && event.id === 'Refresh')
             this.checkForNotification();
     }
 
@@ -28,7 +41,10 @@ export default class NotificationsScreen extends React.Component {
             if (response.questionnaires.length === 0)
                 this.setState({haveWaitingQuestionnaire: undefined, questionnaires: undefined});
             else
-                this.setState({haveWaitingQuestionnaire: response.questionnaires.length, questionnaires: response.questionnaires});
+                this.setState({
+                    haveWaitingQuestionnaire: response.questionnaires.length,
+                    questionnaires: response.questionnaires
+                });
         })
     }
 
@@ -40,24 +56,24 @@ export default class NotificationsScreen extends React.Component {
             });
             return (
                 <View paddingH-25 paddingT-20>
-                <FlatList
-                    keyExtractor={(item, index) => index}
-                    ItemSeparatorComponent={() => <View padding-10/>}
-                    data={this.state.questionnaires}
-                    renderItem={({item}) =>
-                        <Button
-                            onPress={() => {
-                                this.props.navigator.push({
-                                    title: item.name,
-                                    screen: 'example.QuestionnaireScreen',
-                                    passProps: {questionnaire: item}
-                                });
-                            }}
-                            text70
-                            white
-                            background-orange30
-                            label={item.name}/>}
-                />
+                    <FlatList
+                        keyExtractor={(item, index) => index}
+                        ItemSeparatorComponent={() => <View padding-10/>}
+                        data={this.state.questionnaires}
+                        renderItem={({item}) =>
+                            <Button
+                                onPress={() => {
+                                    this.props.navigator.push({
+                                        title: item.name,
+                                        screen: 'example.QuestionnaireScreen',
+                                        passProps: {questionnaire: item}
+                                    });
+                                }}
+                                text70
+                                white
+                                background-orange30
+                                label={item.name}/>}
+                    />
                 </View>
             );
         } else {

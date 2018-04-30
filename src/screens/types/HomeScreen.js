@@ -54,7 +54,7 @@ export default class HomeScreen extends React.Component {
         if (event.type === 'NavBarButtonPress' && event.id === 'Logout')
             this.pressLogout();
         if (event.type === 'NavBarButtonPress' && event.id === 'accept') {
-            const f = (value) => this.setState({maximalQuestionnaires: value})
+            const f = (value) => this.setState({maximalQuestionnaires: value});
             this.props.navigator.push({
                 passProps: {
                     maximalQuestionnaires: this.state.maximalQuestionnaires,
