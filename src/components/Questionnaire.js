@@ -50,7 +50,7 @@ export default class Questionnaire extends React.Component {
         return (
             <View flex padding-5>
                 <FlatList
-                    keyExtractor={(item, index) => index}
+                    keyExtractor={(item, index) => index.toString()}
                     ItemSeparatorComponent={() => <View padding-10/>}
                     data={this.state.data}
                     renderItem={({item}) =>
