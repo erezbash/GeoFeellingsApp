@@ -5,15 +5,9 @@ import {handleRegistrationToken} from "./notifcations/androidHandler";
 import {registerScreens} from "./screens";
 import Questionnaire from "./components/Questionnaire";
 import LocationExample from './NativeMethod';
+import {NotificationsAndroid} from 'react-native-notifications';
 
 registerScreens();
-
-if (Platform.OS === 'android') {
-    // NotificationsAndroid.setRegistrationTokenUpdateListener(handleRegistrationToken);
-    // NotificationsAndroid.setNotificationReceivedListener(handleNotificationOpenApp);
-    // NotificationsAndroid.setNotificationOpenedListener(handleNotificationOpenApp);
-
-}
 
 if (Platform.OS === 'ios') {
     NotificationsIOS.addEventListener('remoteNotificationsRegistered', handleRegistrationToken);
@@ -45,6 +39,7 @@ export function startApp(root) {
         case 'after-login':
             if (Platform.OS === 'android') {
                 LocationExample.startSendLocation(token);
+                // NotificationsAndroid.setRegistrationTokenUpdateListener(handleRegistrationToken);
             }
             Navigation.startTabBasedApp({
                 tabs: [

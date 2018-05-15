@@ -3639,13 +3639,6 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-addons-update@^15.6.0:
-  version "15.6.2"
-  resolved "https://registry.yarnpkg.com/react-addons-update/-/react-addons-update-15.6.2.tgz#e53753c5b34887974510c882d7fb075851d5e504"
-  dependencies:
-    fbjs "^0.8.9"
-    object-assign "^4.1.0"
-
 react-autobind@^1.0.6:
   version "1.0.6"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-autobind/-/react-autobind-1.0.6.tgz#936bb58edf6b89b619c50f82f0e617159fdfd4f1"
@@ -3677,9 +3670,9 @@ react-native-blur@^3.1.1:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-button@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-2.2.0.tgz#9d84c6baad3297df587a89bda04e5a678f7957e9"
+react-native-button@^2.3.0:
+  version "2.3.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-button/-/react-native-button-2.3.0.tgz#7d0a90095d415b0edf98a904556a7c4439646568"
   dependencies:
     prop-types "^15.5.10"
 
@@ -3719,9 +3712,9 @@ react-native-keyboard-aware-scrollview@^2.0.0:
   version "2.0.0"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-keyboard-aware-scrollview/-/react-native-keyboard-aware-scrollview-2.0.0.tgz#a7e2cc31b7230893db5dc05eb6fed3f358500a55"
 
-react-native-navigation@^1.1.323:
-  version "1.1.323"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.323.tgz#4c47d1ba6bbb5e9a4e8e29773f1a0f4e44ee925d"
+react-native-navigation@^1.1.458:
+  version "1.1.458"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-navigation/-/react-native-navigation-1.1.458.tgz#fe0ad5f7948768a82ebe69ed4bfc319c94ff9893"
   dependencies:
     lodash "4.x.x"
 
@@ -3743,18 +3736,28 @@ react-native-radio-button@^2.0.1:
     prop-types "^15.5.10"
     react-native-animatable "^1.2.4"
 
+react-native-radio-buttons@^1.0.0:
+  version "1.0.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-radio-buttons/-/react-native-radio-buttons-1.0.0.tgz#be828b85897f80ca66ad66ad7adedb6b1890ab9d"
+
+react-native-ratings@^5.3.0:
+  version "5.3.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-ratings/-/react-native-ratings-5.3.0.tgz#f496ac6ebe934e29d7e2cfe8359b6a812ec95599"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+
 react-native-simple-radio-button@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/react-native-simple-radio-button/-/react-native-simple-radio-button-2.7.1.tgz#4a4a5cae903b6bc680c5e4bd5931948aa7608da0"
 
-react-native-star-rating@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/react-native-star-rating/-/react-native-star-rating-1.0.8.tgz#6e47d5335ddcc7920a5d92e6cc6478f8655a92a3"
+react-native-star-rating@^1.0.9:
+  version "1.0.9"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-star-rating/-/react-native-star-rating-1.0.9.tgz#b25ea19d4494cd1c7b14e931f99e92ddce3ef70d"
   dependencies:
     prop-types "^15.5.10"
-    react-addons-update "^15.6.0"
-    react-native-button "^2.1.0"
-    react-native-vector-icons "^4.2.0"
+    react-native-button "^2.3.0"
+    react-native-vector-icons "^4.5.0"
 
 react-native-tab-view@^0.0.70:
   version "0.0.70"
@@ -3782,9 +3785,9 @@ react-native-ui-lib@^2.0.152:
     react-native-blur "^3.1.1"
     react-native-interactable latest
 
-react-native-vector-icons@^4.2.0:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.4.3.tgz#9e847b8c432a17e5e0ffd60ccf09f3112a18b9df"
+react-native-vector-icons@^4.5.0, react-native-vector-icons@^4.6.0:
+  version "4.6.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.5.10"

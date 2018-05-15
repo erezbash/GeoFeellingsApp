@@ -1,20 +1,12 @@
 import {Alert} from "react-native";
 import {setToken, startApp} from "../app"
-import {awaitFetchPost, awaitFetchPatchWithToken, awaitFetchGetWithToken} from "../javascript/htmlFetch";
+import {
+    awaitFetchPost, awaitFetchPatchWithToken, awaitFetchGetWithToken,
+    awaitFetchPostWithToken
+} from "../javascript/htmlFetch";
 
 export function handleRegistrationToken(deviceToken) {
-    fetch('http:/132.72.23.65:8080/registerToken', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: deviceToken,
-        }),
-    }).catch((error) => {
-        Alert.alert("Error", error);
-    });
+    awaitFetchPostWithToken('registerToken', {token: deviceToken}, false);
 }
 
 export function handleLogin(username, password) {
