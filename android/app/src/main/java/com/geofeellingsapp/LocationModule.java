@@ -73,8 +73,8 @@ public class LocationModule extends ReactContextBaseJavaModule {
 
 
                  AlarmManager alarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-                 // Start service every 20 seconds
-                 alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),60 * 1000, pintent);
+                 // Start service every 10 minutes
+                 alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),10 * 60 * 1000, pintent);
              }
              else
                 Log.v("ReactNative", "---------Alarm is already active---------");
